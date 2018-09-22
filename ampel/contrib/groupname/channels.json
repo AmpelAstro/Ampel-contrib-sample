@@ -1,0 +1,417 @@
+{
+    "HU_EXAMPLE": {
+        "version": 1.0,
+        "active": false,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": false,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "BasicMultiFilter",
+                    "runConfig": {
+                        "filters": [
+                            {
+                                "criteria": [
+                                    {
+                                        "attribute": "rb",
+                                        "value": 0.8,
+                                        "operator": ">"
+                                    },
+                                    {
+                                        "attribute": "fid",
+                                        "value": 1,
+                                        "operator": "="
+                                    },
+                                    {
+                                        "attribute": "mag",
+                                        "value": 18,
+                                        "operator": "<"
+                                    }
+                                ],
+                                "len": 3,
+                                "operator": ">"
+                            },
+                            {
+                                "logicalConnection": "OR",
+                                "criteria": [
+                                    {
+                                        "attribute": "magdiff",
+                                        "value": 0.01,
+                                        "operator": ">"
+                                    }
+                                ],
+                                "len": 3,
+                                "operator": ">"
+                            }
+                        ]
+                    }
+                },
+                "t2Compute": [
+                    {
+                        "t2Unit": "SNCOSMO",
+                        "runConfig": "default"
+                    }
+                ],
+                "t3Supervize": {}
+            }
+        },
+        "general": {
+            "t3Supervize": {
+                "Purge": {}
+            }
+        }
+    },
+    "HU_RANDOM": {
+        "version": 1.0,
+        "active": true,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": false,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "RandFilter",
+                    "runConfig": {
+                        "passingRate": 1e-3
+                    }
+                },
+                "t2Compute": [
+                    {
+                        "t2Unit": "SNCOSMO",
+                        "runConfig": "default"
+                    }
+                ],
+                "t3Supervize": {}
+            }
+        },
+        "general": {
+            "t3Supervize": {
+                "Purge": {}
+            }
+        }
+    },
+    "HU_BASIC_CATALOG_FILTER_EXAMPLE": {
+        "version": 1.0,
+        "active": false,
+        "input": [
+            {
+                "instrument": "ZTF",
+                "alerts": "IPAC",
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": false,
+                    "updatedHUZP": false
+                }
+            }
+        ],
+        "t0Filter": {
+            "id": "BasicCatalogFilter",
+            "runConfig": {
+                "catName": "milliquas",
+                "catRAKey": "ra",
+                "catDecKey": "dec",
+                "searchMethod": "healpix",
+                "rsArcsec": 5,
+                "rejectOnMatch": false,
+                "alertPosType": "av"
+            }
+        },
+        "t2Compute": [
+            {
+                "t2Unit": "SNCOSMO",
+                "runConfig": "default"
+            }
+        ]
+    },
+    "OKC_LENSED": {
+        "version": 1.0,
+        "active": true,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": true,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "LensedTransientFilter",
+                    "runConfig": {
+                        "MinNdet": 2,
+                        "ClusListSearchRadius": 60.0,
+                        "MasterlensSearchRadius": 10.0,
+                        "CaslteQSOSearchRadius": 10.0
+                    }
+                },
+                "t2Compute": [
+                    {
+                        "t2Unit": "SNCOSMO",
+                        "runConfig": "default"
+                    }
+                ],
+                "t3Supervize": {}
+            }
+        },
+        "general": {
+            "t3Supervize": {
+                "Purge": {}
+            }
+        }
+    },
+    "NO_FILTER": {
+        "version": 1.0,
+        "active": false,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": true,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "NoFilter",
+                    "runConfig": {}
+                },
+                "t2Compute": [
+                    {
+                        "t2Unit": "SNCOSMO",
+                        "runConfig": "default"
+                    }
+                ],
+                "t3Supervize": {}
+            }
+        },
+        "general": {
+            "t3Supervize": {
+                "Purge": {}
+            }
+        }
+    },
+    "DESY_TOO_TEST": {
+        "version": 1.0,
+        "active": true,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": true,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "ToOFilter",
+                    "runConfig": {
+                        "ToOTargetDatabase": "ToO",
+                        "ToOTargetCollection": "test",
+                        "Sphere2DKey": "pos",
+                        "InclusiveSearchRadius": 60.0,
+                        "TargetRAKey": "ra",
+                        "TargetDecKey": "dec",
+                        "TargetMinJDKey": "jd_min",
+                        "TargetMaxJDKey": "jd_max",
+                        "TargetErrRadKey": "r68"
+                    }
+                },
+                "t2Compute": [
+                    {
+                        "t2Unit": "SNCOSMO",
+                        "runConfig": "default"
+                    }
+                ],
+                "t3Supervize": {}
+            }
+        },
+        "general": {
+            "t3Supervize": {
+                "Purge": {}
+            }
+        }
+    },
+    "HU_GP_CLEAN": {
+    "version" : 1.0,
+    "active" : true,
+    "sources" : {
+        "ZTFIPAC" : {
+            "parameters" : {
+                "ZTFPartner" : false,
+                "autoComplete" : false,
+                "updatedHUZP" : false
+            },
+            "t0Filter" : {
+                "id" : "DecentFilter",
+                "runConfig": {
+                    "MIN_NDET": 3,
+                    "MIN_TSPAN": 1, 
+                    "MAX_TSPAN": 666,
+                    "MIN_RB": 0.3,
+                    "MAX_FWHM": 3.5,
+                    "MAX_ELONG": 1.4,
+                    "MAX_MAGDIFF": 0.4,
+                    "MAX_NBAD": 0,
+                    "MIN_DIST_TO_SSO": 20,
+                    "MIN_GAL_LAT": -42,
+                    "GAIA_RS": 20,
+                    "GAIA_PM_SIGNIF": 3,
+                    "GAIA_PLX_SIGNIF": 3,
+                    "GAIA_VETO_GMAG_MIN": 9,
+                    "GAIA_VETO_GMAG_MAX": 20,
+                    "PS1_SGVETO_RAD": 1,
+                    "PS1_SGVETO_SGTH": 0.8,
+                    "PS1_CONFUSION_RAD": 3,
+                    "PS1_CONFUSION_SG_TOL": 0.1
+                }
+            },
+            "t2Compute" : [ 
+                    {
+                    "t2Unit" : "SNCOSMO",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "LCQUALITY",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "MARSHALMONITOR",
+                    "runConfig" : "simple"
+                    },
+                    {
+                    "t2Unit" : "CATALOGMATCH",
+                    "runConfig": "general"
+                    }
+                ]
+            }
+        }
+    },
+    "HU_NEARBY_CLUSTERS": {
+    "version" : 1.0,
+    "active" : true,
+    "sources" : {
+        "ZTFIPAC" : {
+            "parameters" : {
+                "ZTFPartner" : true,
+                "autoComplete" : false,
+                "updatedHUZP" : false
+            },
+            "t0Filter" : {
+                "id" : "TransientInClusterFilter",
+                "runConfig": {
+                    "BIG_SEARCH_RADIUS_ARCMIN": 60,
+                    "CLUSTER_RADIUS_MULTIPLIER": 1.5,
+                    "MIN_NDET": 3,
+                    "MIN_TSPAN": -666,
+                    "MAX_TSPAN": 666,
+                    "MIN_RB": 0.3,
+                    "MAX_FWHM": 3.5,
+                    "MAX_ELONG": 1.4,
+                    "MAX_MAGDIFF": 0.4,
+                    "MAX_NBAD": 0,
+                    "MIN_DIST_TO_SSO": 20,
+                    "MIN_GAL_LAT": -42,
+                    "GAIA_RS": 20,
+                    "GAIA_PM_SIGNIF": 3,
+                    "GAIA_PLX_SIGNIF": 3,
+                    "GAIA_VETO_GMAG_MIN": 9,
+                    "GAIA_VETO_GMAG_MAX": 20,
+                    "PS1_SGVETO_RAD": 1,
+                    "PS1_SGVETO_SGTH": 0.8,
+                    "PS1_CONFUSION_RAD": 3,
+                    "PS1_CONFUSION_SG_TOL": 0.1
+                }
+            },
+            "t2Compute" : [
+                    {
+                    "t2Unit" : "SNCOSMO",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "LCQUALITY",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "CATALOGMATCH",
+                    "runConfig": "general"
+                    }
+                ]
+            }
+        }
+    },
+    "TRANSIENTS_IN_ELLIPTICAL": {
+        "version": 1.0,
+        "active": true,
+        "sources": {
+            "ZTFIPAC": {
+                "parameters": {
+                    "ZTFPartner": true,
+                    "autoComplete": false,
+                    "updatedHUZP": false
+                },
+                "t0Filter": {
+                    "id": "TransientInEllipticalFilter",
+                    "runConfig": {
+                        "absmag_thresh": -19.5,
+                        "search_radius": 5.0,
+                        "rb_th": 0.2
+                    }
+                },
+                "t2Compute": []
+            }
+        }
+    },
+    "HU_XSHOOTER_RRM": {
+    "version" : 1.0,
+    "active" : true,
+    "sources" : {
+        "ZTFIPAC" : {
+            "parameters" : {
+                "ZTFPartner" : true,
+                "autoComplete" : false,
+                "updatedHUZP" : false
+            },
+            "t0Filter" : {
+                "id" : "XShooterFilter",
+                "runConfig": {
+                    "MAX_DEC": 30,
+                    "DET_WITHIN": 0.25,
+                    "UL_WITHIN": 5,
+                    "MIN_NDET": 2,
+                    "MIN_TSPAN": -666, 
+                    "MAX_TSPAN": 666,
+                    "MIN_RB": 0.3,
+                    "MAX_FWHM": 3.5,
+                    "MAX_ELONG": 1.4,
+                    "MAX_MAGDIFF": 0.4,
+                    "MAX_NBAD": 0,
+                    "MIN_DIST_TO_SSO": 20,
+                    "MIN_GAL_LAT": 10,
+                    "GAIA_RS": 20,
+                    "GAIA_PM_SIGNIF": 3,
+                    "GAIA_PLX_SIGNIF": 3,
+                    "GAIA_VETO_GMAG_MIN": 9,
+                    "GAIA_VETO_GMAG_MAX": 20,
+                    "PS1_SGVETO_RAD": 1,
+                    "PS1_SGVETO_SGTH": 0.8,
+                    "PS1_CONFUSION_RAD": 3,
+                    "PS1_CONFUSION_SG_TOL": 0.1
+                }
+            },
+            "t2Compute" : [ 
+                    {
+                    "t2Unit" : "SNCOSMO",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "LCQUALITY",
+                    "runConfig" : "default"
+                    },
+                    {
+                    "t2Unit" : "CATALOGMATCH",
+                    "runConfig": "general"
+                    }
+                ]
+            }
+        }
+    }
+}

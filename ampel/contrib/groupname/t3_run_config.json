@@ -1,0 +1,128 @@
+{
+  "SlackSummaryPublisher_Lensing": {
+    "mycols": [
+      "ztf_name",
+      "ra",
+      "dec",
+      "magpsf",
+      "sgscore1",
+      "rb",
+      "most_recent_detection",
+      "first_detection",
+      "n_detections",
+      "distnr",
+      "distpsnr1",
+      "isdiffpos",
+      "_id"
+    ],
+    "channel(s)": [
+      "OKC_LENSED",
+      "TRANSIENTS_IN_ELLIPTICAL"
+    ],
+    "excitement_levels": {
+      "Low": 50,
+      "Mid": 200,
+      "High": 400
+    },
+    "Slack_token": "xoxb-106494213175-397912266598-TOE3sSy3KuyDr6bPIuyO730L",
+    "Slack_channel": "#ztf_lensing",
+    "full_photometry": true
+  },
+  "SlackSummaryPublisher_ToO": {
+    "mycols": [
+      "ztf_name",
+      "ra",
+      "dec",
+      "magpsf",
+      "sgscore1",
+      "rb",
+      "most_recent_detection",
+      "first_detection",
+      "n_detections",
+      "distnr",
+      "distpsnr1",
+      "isdiffpos",
+      "_id"
+    ],
+    "channel(s)": [
+      "DESY_TOO_TEST"
+    ],
+    "quiet": true,
+    "excitement_levels": {
+      "Low": 50,
+      "Mid": 200,
+      "High": 400
+    },
+    "Slack_token": "xoxb-297846339667-377203174150-iAZYoQV3H7V8cztCe27KrpYg",
+    "Slack_channel": "#ampel-live",
+    "full_photometry": true
+  },
+  "MarshalPublisher_Lensing": {
+    "marshal_program" : "Gravitational Lenses",
+    "marshal_userID" : "AMPELBOT",
+    "marshal_userpwd" : "spreepiraten",
+    "ingest_all" : true
+  },
+  "MarshalPublisher_test": {
+    "marshal_program" : "AMPEL Test",
+    "marshal_userID" : "AMPELBOT",
+    "marshal_userpwd" : "spreepiraten",
+    "ingest_all" : true
+  },
+  "SlackSummaryPublisher_HUCleanToSlack": {
+    "mycols": [
+      "ztf_name",
+      "ra",
+      "dec",
+      "magpsf",
+      "sgscore1",
+      "rb",
+      "most_recent_detection",
+      "first_detection",
+      "n_detections",
+      "distnr",
+      "distpsnr1",
+      "isdiffpos",
+      "_id"
+    ],
+    "channel(s)": [
+      "HU_GP_CLEAN"
+    ],
+    "excitement_levels": {
+      "Low": 10,
+      "Mid": 100,
+      "High": 300
+    },
+    "Slack_token": "xoxb-106494213175-397912266598-TOE3sSy3KuyDr6bPIuyO730L",
+    "Slack_channel": "#ztf_cosmosne",
+    "full_photometry": true
+  },
+  "SlackSummaryPublisher_ZTFIaRapid": {
+    "mycols": [
+      "ztf_name",
+      "ra",
+      "dec",
+      "magpsf",
+      "sgscore1",
+      "rb",
+      "most_recent_detection",
+      "first_detection",
+      "n_detections",
+      "distnr",
+      "distpsnr1",
+      "isdiffpos",
+      "_id"
+    ],
+    "channel(s)": [
+      "HU_XSHOOTER_RRM"
+    ],
+    "excitement_levels": {
+      "Low": 1,
+      "Mid": 5,
+      "High": 10
+    },
+    "Slack_token": "xoxb-106494213175-397912266598-TOE3sSy3KuyDr6bPIuyO730L",
+    "Slack_channel": "#ztf_rapid",       
+    "full_photometry": true
+  }
+}
