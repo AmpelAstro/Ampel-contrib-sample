@@ -46,8 +46,6 @@ class SampleFilter(AbsAlertFilter):
 			'GAIA_RS',					# search radius for GAIA DR2 matching [arcsec]
 			'GAIA_PM_SIGNIF',			# significance of proper motion detection of GAIA counterpart [sigma]
 			'GAIA_PLX_SIGNIF',			# significance of parallax detection of GAIA counterpart [sigma]
-			'GAIA_VETO_GMAG_MIN', 		# min gmag for normalized distance cut of GAIA counterparts [mag]
-			'GAIA_VETO_GMAG_MAX' 		# max gmag for normalized distance cut of GAIA counterparts [mag]
 			)
 		for el in config_params:
 			if el not in run_config:
@@ -70,8 +68,8 @@ class SampleFilter(AbsAlertFilter):
 		self.gaia_rs					= run_config['GAIA_RS']
 		self.gaia_pm_signif				= run_config['GAIA_PM_SIGNIF']
 		self.gaia_plx_signif			= run_config['GAIA_PLX_SIGNIF']
-		self.gaia_veto_gmag_min			= run_config['GAIA_VETO_GMAG_MIN']
-		self.gaia_veto_gmag_max			= run_config['GAIA_VETO_GMAG_MAX']
+		self.gaia_veto_gmag_min			= 12
+		self.gaia_veto_gmag_max			= 18
 
 		# technical
 		self.catshtm_path 			= urlparse(base_config['catsHTM.default']).path
