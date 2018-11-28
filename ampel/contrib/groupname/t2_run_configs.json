@@ -21,68 +21,7 @@
             "degree": 3
         }
     },
-    "AGN_default": {
-        "t2Unit": "AGN",
-        "runConfig": "default",
-        "author": "ztf-software@desy.de",
-        "version": 1.0,
-        "lastChange": "28.02.2018",
-        "private": false,
-        "parameters": {
-            "name": "value"
-        }
-    },
-    "PHOTO_Z_default": {
-        "t2Unit": "PHOTO_Z",
-        "runConfig": "default",
-        "author": "ztf-software@desy.de",
-        "version": 1.0,
-        "lastChange": "28.02.2018",
-        "parameters": {
-            "name": "value"
-        }
-    },
-    "PHOTO_TYPE_default": {
-        "t2Unit": "PHOTO_TYPE",
-        "runConfig": "default",
-        "author": "ztf-software@desy.de",
-        "version": 1.0,
-        "lastChange": "28.02.2018",
-        "private": false,
-        "parameters": {
-            "name": "value"
-        }
-    },
-    "SNCOSMO_default": {
-        "t2Unit": "SNCOSMO",
-        "runConfig": "default",
-        "author": "ampel-info@desy.de",
-        "version": 1.0,
-        "lastChange": "18.03.2018",
-        "private": false,
-        "parameters": {
-            "model": "salt2"
-        }
-    },
-    "CATALOGMATCH_sdss_class": {
-        "t2Unit": "CATALOGMATCH",
-        "runConfig": "sdss_class",
-        "author": "ampel-info@desy.de",
-        "version": 1.0,
-        "lastChange": "27.08.2018",
-        "private": false,
-        "parameters": {
-            "catalogs":{
-                "SDSS_spec":{
-                    "use": "extcats",
-                    "catq_kwargs": {"ra_key": "ra", "dec_key": "dec"},
-                    "rs_arcsec": 1,
-                    "keys_to_append": ["z", "bptclass", "subclass"]
-                }
-            }
-        }
-    },
-    "CATALOGMATCH_general": {
+    "CATALOGMATCH_sdssz": {
         "t2Unit": "CATALOGMATCH",
         "runConfig": "general",
         "author": "ampel-info@desy.de",
@@ -98,70 +37,10 @@
                                     "dec_key": "dec"
                                 },
                     "rs_arcsec": 3,
-                    "keys_to_append": ["z", "bptclass", "subclass"]
+                    "keys_to_append": ["z", "subclass"]
                 },
-                "NEDz": {
-                    "use": "catsHTM",
-                    "catq_kwargs" : {
-                                    "ra_key": "RA",
-                                    "dec_key": "Dec"
-                                },
-                    "rs_arcsec": 3,
-                    "keys_to_append": ["ObjType", "Velocity", "z"]
-                },
-                "milliquas": {
-                    "use": "extcats",
-                    "catq_kwargs" : {
-                                    "ra_key": "ra",
-                                    "dec_key": "dec"
-                                },
-                    "rs_arcsec": 3,
-                    "keys_to_append": ["broad_type", "name", "redshift", "qso_prob"]
-                }
             }
         }
     },
-    "LCQUALITY_default": {
-        "t2Unit": "LCQUALITY",
-        "runConfig": "default",
-        "author": "ampel-info@desy.de",
-        "version": 1.0,
-        "lastChange": "13.09.2018",
-        "private": false,
-        "parameters": {
-            "filter_ids": [1, 2, 3],
-            "exclude_ulims_after": true
-        }
-    },
-    "MARSHALMONITOR_simple": {
-        "t2Unit": "MARSHALMONITOR",
-        "runConfig": "simple",
-        "author": "ampel-info@desy.de",
-        "version": 1.0,
-        "lastChange": "18.09.2018",
-        "private": false,
-        "parameters": {
-            "simple_out": true,
-            "program(s)": {
-                "AMPEL Test": {
-                    "auth": ["AMPELBOT", "spreepiraten"],
-                    "update_every_h": 2,
-                    "include_candidates": false,
-                    "tag": "AMPEL"
-                },
-                "Cosmology": {
-                    "auth": ["AMPELBOT", "spreepiraten"],
-                    "update_every_h": 2,
-                    "include_candidates": false,
-                    "tag": "COSM"
-                },
-                "Redshift Completeness Factor": {
-                    "auth": ["MatteoGiomi", "Popoloma10!"],
-                    "update_every_h": 2,
-                    "include_candidates": false,
-                    "tag": "RCF"
-                }
-            }
-        }
-    }
+
 }
