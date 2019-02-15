@@ -9,7 +9,7 @@
 
 from ampel.base.abstract.AmpelABC import AmpelABC, abstractmethod
 from ampel.base.abstract.AbsT2Unit import AbsT2Unit
-from ampel.core.flags.T2RunStates import T2RunStates
+#from ampel.core.flags.T2RunStates import T2RunStates
 import numpy
 
 class T2ExamplePolyFit(AbsT2Unit):
@@ -131,9 +131,9 @@ class T2ExamplePolyFit(AbsT2Unit):
 				EXCEPTION:     An exception occured
 		"""
 
-		if run_config is None or 'degree' not in run_config:
-			self.logger.error("Run config parameter 'degree' is missing")
-			return T2RunStates.BAD_CONFIG
+		# if run_config is None or 'degree' not in run_config:
+		# 	self.logger.error("Run config parameter 'degree' is missing")
+		# 	return T2RunStates.BAD_CONFIG
 
 		x = light_curve.get_values("obs_date")
 		y = light_curve.get_values("mag")
