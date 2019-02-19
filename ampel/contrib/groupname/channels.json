@@ -1,4 +1,105 @@
 [
+  {
+    "channel": "BrightNStableSample",
+    "sources": [
+      {
+        "t0Filter": {
+          "runConfig": {
+            "MAX_TSPAN": 5, 
+            "GAIA_RS": 20, 
+            "MAX_FWHM": 5.5, 
+            "MIN_RB": 0.3, 
+            "MAX_NBAD": 2, 
+            "MIN_TSPAN": 0, 
+            "MIN_DIST_TO_SSO": 20, 
+            "PS1_SGVETO_SGTH": 0.8, 
+            "MIN_NDET": 2, 
+            "PS1_SGVETO_RAD": 1, 
+            "MIN_GAL_LAT": 14, 
+            "GAIA_VETO_GMAG_MAX": 20, 
+            "GAIA_PLX_SIGNIF": 3, 
+            "PS1_CONFUSION_RAD": 3, 
+            "GAIA_PM_SIGNIF": 3, 
+            "MAX_MAGDIFF": 1.0, 
+            "GAIA_VETO_GMAG_MIN": 9, 
+            "MAX_ELONG": 1.4, 
+            "PS1_CONFUSION_SG_TOL": 0.1
+          }, 
+          "unitId": "DecentFilter"
+        }, 
+        "t2Compute": [
+        	{
+            	"unitId": "CATALOGMATCH",
+            	"runConfig": "general",  
+          	},
+		{
+		"unitId" : "T2ExamplePolyFit",
+		"runConfig": 
+			{
+			"degree" : 3
+			}
+		},
+        ], 
+        "stream": "ZTFIPAC", 
+        "parameters": {
+          "autoComplete": "live", 
+          "ZTFPartner": false, 
+          "updatedHUZP": false
+        }
+      }
+    ] 
+  },
+	{
+		"channel": "HU_TNS_MSIP",
+		"sources": [
+			{
+				"stream": "ZTFIPAC",
+				"parameters" : {
+					"ZTFPartner" : false,
+					"autoComplete" : false,
+					"updatedHUZP" : false
+				},
+				"t0Filter" : {
+					"unitId" : "DecentFilter",
+					"runConfig": {
+						"MIN_NDET": 2,
+						"MIN_TSPAN": 1, 
+						"MAX_TSPAN": 5,
+						"MIN_RB": 0.3,
+						"MAX_FWHM": 4.5,
+						"MAX_ELONG": 1.4,
+						"MAX_MAGDIFF": 1.0,
+						"MAX_NBAD": 0,
+						"MIN_DIST_TO_SSO": 20,
+						"MIN_GAL_LAT": 14,
+						"GAIA_RS": 20,
+						"GAIA_PM_SIGNIF": 3,
+						"GAIA_PLX_SIGNIF": 3,
+						"GAIA_VETO_GMAG_MIN": 9,
+						"GAIA_VETO_GMAG_MAX": 20,
+						"PS1_SGVETO_RAD": 1,
+						"PS1_SGVETO_SGTH": 0.8,
+						"PS1_CONFUSION_RAD": 3,
+						"PS1_CONFUSION_SG_TOL": 0.1
+					}
+				},
+				"t2Compute" : [ 
+					{
+						"unitId" : "LCQUALITY",
+						"runConfig" : "default"
+					},
+					{
+						"unitId" : "MARSHALMONITOR",
+						"runConfig" : "simple"
+					},
+					{
+						"unitId" : "CATALOGMATCH",
+						"runConfig": "general"
+					}
+				]
+			}
+		]
+	},
 	{
 		"channel": "FILTER_ALERTPROP",
 		"active": false,
@@ -80,87 +181,6 @@
 						"unitId": "SNCOSMO",
 						"runConfig": "default"
 					}
-				]
-			}
-		]
-	},
-	{
-		"channel": "FILTER_SAMPLE",
-		"sources": [
-			{
-				"stream": "ZTFIPAC",
-				"parameters" : {
-					"ZTFPartner" : false,
-					"autoComplete" : "live",
-					"updatedHUZP" : false
-				},
-				"t0Filter" : {
-					"unitId" : "SampleFilter",
-					"runConfig": {
-						"MIN_NDET": 3,
-						"MAX_FWHM": 5.5,
-						"MAX_MAGDIFF": 1.0,
-						"MAX_NBAD": 0,
-						"GAIA_RS": 30,
-						"GAIA_PM_SIGNIF": 3,
-						"GAIA_PLX_SIGNIF": 3
-					}
-				},
-				"t2Compute" : [ 
-					{
-						"unitId" : "SNCOSMO",
-						"runConfig" : "default"
-					},
-					{
-						"unitId" : "CATALOGMATCH",
-						"runConfig": "sdssz"
-					},
-					{
-						"unitId" : "T2ExamplePolyFit",
-						"runConfig": "default"
-					},
-				]
-			}
-		]
-	},
-	{
-		"channel": "FILTER_SAMPLE_LONGLIVED",
-		"sources": [
-			{
-				"stream": "ZTFIPAC",
-				"parameters" : {
-					"ZTFPartner" : false,
-					"autoComplete" : "live",
-					"updatedHUZP" : false
-				},
-				"t0Filter" : {
-					"unitId" : "SampleFilter",
-					"runConfig": {
-						"MIN_NDET": 8,
-						"MAX_FWHM": 999.,
-						"MAX_MAGDIFF": 10.0,
-						"MAX_NBAD": 3,
-						"GAIA_RS": 10,
-						"GAIA_PM_SIGNIF": 4,
-						"GAIA_PLX_SIGNIF": 4
-					}
-				},
-				"t2Compute" : [ 
-					{
-						"unitId" : "SNCOSMO",
-						"runConfig" : "default"
-					},
-					{
-						"unitId" : "CATALOGMATCH",
-						"runConfig": "sdssz"
-					},
-					{
-						"unitId" : "T2ExamplePolyFit",
-						"runConfig": "default"
-					},					{
-						"unitId" : "T2ExamplePolyFit",
-						"runConfig": "advanced"
-					},
 				]
 			}
 		]
