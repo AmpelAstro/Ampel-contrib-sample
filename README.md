@@ -12,6 +12,8 @@ We have included a series of notebooks that demonstrate how Ampel works at the d
 
 Use of this sample AMPEL setup requires the Ampel-base and Ampel-base-ZTF repositories to be installed, as well as a set of common python libraries such as fastavro.
 
+![TransientLife](figures/transientLife.pdf)
+
 ## Use of this repository to create a full AMPEL channel
 
 Incorporating modules and channels into a live instance briefly consists of: i. Forking this repository under a name [Ampel-contrib-xyz] where xyz is a unique name ii. Add new modules to the t0/t2/t3 subdirectories. iii. Define a channel to use this using the base configuration files. iv. Use the dev alert processor and notebooks to verify expected behaviour. v. Discuss with AMPEL administrators to queue repository for inclusion into the the next build.
