@@ -1,6 +1,8 @@
 # Ampel-contrib-sample Notebooks
 
-These notebooks contain examples of how to implement and run units for each one of the AMPEL tiers in a standalone way. This is, without the need to have the whole AMPEL system, with all of its services, running.
+These notebooks contain examples of how to get to know, implement and test units for the AMPEL tiers in a standalone way. Standalone means that the fairly complex background database and its task managers do not need to be installed and initiated. The AMPEL development packages are constructed such that units (python modules) that run with these will also function in the full, online AMPEL and system.
+
+The current notebooks describe the T0 and T2 stages. T3 units are harder to construct since they make use of further concepts such as TransientViews and the Journal, and iterate over chunks of all transients saved by the channel. We recommend channels to start by using the preconfigured units provided by the AMPEL development teams.
 
 ## Installation with Pip
 
@@ -29,6 +31,8 @@ Afterwards, proceed to install the rest of the dependencies via pip using the `r
 ```
 pip install -r Ampel-contrib-sample/requirements.txt
 ```
+
+Note that this will install two other AMPEL repositories: Ampel-base (containing class definitions) and Ampel-base-ZTF (which contains the shaper classes that can ingest ZTF alerts).
 
 Finally, just run the command:
 
