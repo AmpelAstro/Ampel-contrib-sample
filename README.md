@@ -73,7 +73,7 @@ Each channel is defined in a configuration file similar to [this](ampel/contrib/
 
 An instance of AMPEL hosted at the DESY computer centre (Zeuthen) recieves and parses the live ZTF alert stream distributed by the University of Washingtion. This process is summarized in the following figure:
 
-[AmpelLive](figures/ampel_intro.png)
+![AmpelLive](figures/ampel_intro.png)
 
 One of the channels in this instance is being tuned to automatically submit high-quality extragalactic candidates with a high probability of being supernovae or AGNs to the TNS. The current selection focuses on transients brighter than 19.5 mag and with a contamination by stellar variability at <5%. Submission can be found at the TNS with the sender *AMPEL_ZTF_MSIP*. 
 
