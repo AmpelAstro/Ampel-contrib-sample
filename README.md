@@ -50,7 +50,7 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 4. T3: A unit regularly tests whether the transient warrants a Slack posting (requesting potential further follow-up). The submit criteria are fulfilled the second time the unit is run. In both cases the evaluation is stored in the transient *Journal*, which is later used to prevent a transient to be posted multiple times. Once the transient has been not been updated for an extended time a T3 unit *purges* the transient to an external database that can be direclty queried by channel owners.
 5. Database: A transient entry is created in the DB as the first alert is accepted. After this, each new datapoint causes a new state to be created. T2 Science Records are each associated with one state. The T3 units return information that is stored in the Journal.
 
-
+A technical outline of AMPEL can be found [here](figures/ZTF_Pipeline_overview_June_18.pdf).
 
 
 ## How to use this repository to create a full AMPEL channel
@@ -66,3 +66,15 @@ Units that are to be run through AMPEL should be included in the correct folder 
 ### Configuration files
 
 Each channel is defined in a configuration file similar to [this](ampel/contrib/groupname/channels.json). These describe which units each channel should make use of and the *run parameters* that should be provided to the unit when executed.
+
+
+
+## The AMPEL live instance: parsing the ZTF alert stream and submitting candidates to TNS 
+
+An instance of AMPEL hosted at the DESY computer centre (Zeuthen) recieves and parses the live ZTF alert stream distributed by the University of Washingtion. This process is summarized in the following figure:
+
+[AmpelLive](figures/ampel_intro.png)
+
+One of the channels in this instance is being tuned to automatically submit high-quality extragalactic candidates with a high probability of being supernovae or AGNs to the TNS. The current selection focuses on transients brighter than 19.5 mag and with a contamination by stellar variability at <5%. Submission can be found at the TNS with the sender *AMPEL_ZTF_MSIP*. 
+
+## 
