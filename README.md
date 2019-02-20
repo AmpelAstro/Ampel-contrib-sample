@@ -25,7 +25,7 @@ Using AMPEL means creating a *channel*, corresponding to a specific science goal
 In Tier 0 (T0), the full alert stream is *filtered* to only include potentially interesting candidates. This tier thus works as a data broker: objects that merit further study are selected from the incoming alert stream. However, unlike most brokers, accepted transients are inserted into a database (DB) of active transients rather than immediately being sent downstream. Users can either provide their own algorithm for filtering, or configure one of the filter classes provided by the community, according to their needs. 
 
 
-> Example T0: The simple AMPEL channel ``BrightNStable'' looks for variables with at least three well behaved detections (few bad pixels and reasonable subtraction FWHM) and not coincident with a Gaia DR2 star-like source. This is implemented through a python class SampleFilter that operates on an alert and returns either a list of requests for follow-up (T2) analysis, if selection criteria are fulfilled, or `False` if they are not. AMPEL will test every ZTF alert using this class, and all alerts that pass the cut are added to the active transient DB. The transient is then associated with the channel ``BrightNStable''. 
+> Example T0: The simple AMPEL channel `BrightNStable` looks for variables with at least three well behaved detections (few bad pixels and reasonable subtraction FWHM) and not coincident with a Gaia DR2 star-like source. This is implemented through a python class SampleFilter that operates on an alert and returns either a list of requests for follow-up (T2) analysis, if selection criteria are fulfilled, or `False` if they are not. AMPEL will test every ZTF alert using this class, and all alerts that pass the cut are added to the active transient DB. The transient is then associated with the channel ``BrightNStable''. 
 
 
 Tier 1 (T1) is largely autonomous and exists in parallel to the other tiers. T1 carries out duties related to *updates* of datapoints and states. Example activities include completing transient states with datapoints that were present in new alerts but where these were not individually accepted by the channel filter (e.g., in the case of lower significance detections at late phases), as well as querying an external archive for updated calibration or adding photometry from additional sources.
@@ -33,7 +33,7 @@ Tier 1 (T1) is largely autonomous and exists in parallel to the other tiers. T1 
 
 Additional transient information is derived or retrieved in Tier 2 (T2), and are always connected to a state and stored as a *ScienceRecord*. T2 units either work with the empty state, relevant for e.g. catalog matching that only depends on the position, or depends on the datapoints of a state to calculate new, derived transient properties. In the latter case, the T2 task will be called again as soon as a new state is created.  This could be due both to new observations or, for example, updated calibration of old datapoints. Possible T2 units include lightcurve fitting, photometric redshift estimation, machine learning classification, and catalog matching.
 
-> Example T2: For an optical transient, a state corresponds to a lightcurve and each photometric observation is represented by a datapoint. A new observation of the transient would extend the lightcurve and thus create a new state.``BrightNStable'' requests a third order polynomial fit  for each state  using the `T2PolyFit` class. The outcome, in this case polynomial coefficients, are saved to the database.
+> Example T2: For an optical transient, a state corresponds to a lightcurve and each photometric observation is represented by a datapoint. A new observation of the transient would extend the lightcurve and thus create a new state. `BrightNStable` requests a third order polynomial fit  for each state  using the `T2PolyFit` class. The outcome, in this case polynomial coefficients, are saved to the database.
 
 
 The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s are initiated by events (the addition of new states), T3 units are executed at pre-determined times. These can range from yearly data dumps, to daily updates, to effectively real-time execution every few seconds. T3 processes access data through the *TransientView*, which concatenates all  information regarding a transient. This includes both states and ScienceRecords that are accessible by the channel. T3s iterate through all transients of a channel. This allows for an evaluation of multiple ScienceRecords, and comparisons between different objects or, more generally, any kind of population analysis. One typical case is the ranking of candidates which would be interesting to observe on a given night.  T3 units include options to push and pull information from for example Slack, TNS and web-servers.
@@ -43,7 +43,7 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 
 ## Life of a transient in AMPEL
 
-![TransientLife](figures/transientLife.pdf)
+![TransientLife](figures/ampellife.png)
 
 
 *Life of a transient in AMPEL*. Sample behaviour at the four tiers of AMPEL as well as the database access are shown as columns, with the left side of the figure indicating when the four alerts belonging to the transient were received.
