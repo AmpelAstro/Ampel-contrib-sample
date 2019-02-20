@@ -1,7 +1,7 @@
-# Ampel-contrib-sample
+# Alert Management, Photometry and Evaluation of Lightcurves
 
 
-Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. This repository contains sample code showing how users can create units through implementing a set of abstract python modules. The inheritence allows units to be implemented into the AMPEL systems for the analysis of either a live stream, archived data or simulations. To explore these, first head to the jupyter notebooks (and install instructions) in the [notebooks directory](notebooks/). The rest of this files contain an introduction to the AMPEL system.
+Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers where the first filters alerts, the second collects further data, the third computes derived properties and the fourth reacts to the assembled information. Users have great freedom in implementing algorithms into units that operate at these tiers, units which are subsequently implemented into the AMPEL systems for the analysis of either a live stream, archived data or simulations. Instructions for how to work with and implement AMPEL units can be found in the jupyter notebooks (and install instructions) in the [notebooks directory](notebooks/) of this repository. The rest of this files contain a general introduction to the AMPEL system.
 
 
 ## Introduction
@@ -12,9 +12,6 @@ The live AMPEL instance functions as a public broker for use with the public ZTF
 
 
 ## AMPEL in a nutshell
-
-AMPEL is a framework for analyzing and reacting to streamed information, with a focus on astronomical transients. Fulfilling the above design goals requires a flexible framework built using a set of general concepts. These will be introduced in this section, accompanied by examples based on optical data from ZTF. 
-
 
 The core object in AMPEL is a *transient*, a single object identified by a creation date and typically a region of origin in the sky. Each transient is linked to a set of *datapoints* that represent individual measurements. Datapoints can be added, updated, marked as bad, or replaced, but never removed. Each datapoint can be associated with tags indicating e.g. any masking or proprietary restrictions. Transients and datapoints are connected by *states*, where a state references a *compound* of datapoints. A state represents a view of a transient available at some time and for some observer. For an optical photometric survey, a compound can be directly interpreted as a set of flux measurements or a lightcurve.
 
@@ -56,8 +53,16 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 
 
 
+## How to use this repository to create a full AMPEL channel
 
-## Use of this repository to create a full AMPEL channel
+Incorporating modules and channels into a live instance briefly consists of: i. Forking this repository under a name *Ampel-contrib-xyz* where xyz is a unique name ii. Add new units to the t0/t2/t3 subdirectories. iii. Define a channel to use this using the base configuration files. iv. Use the dev alert processor and notebooks to verify expected behaviour. v. Discuss with AMPEL administrators to queue repository for inclusion into the the next build.
 
-Incorporating modules and channels into a live instance briefly consists of: i. Forking this repository under a name [Ampel-contrib-xyz] where xyz is a unique name ii. Add new modules to the t0/t2/t3 subdirectories. iii. Define a channel to use this using the base configuration files. iv. Use the dev alert processor and notebooks to verify expected behaviour. v. Discuss with AMPEL administrators to queue repository for inclusion into the the next build.
+### Creating units for the T0 and T2 tiers
 
+Units that are to be run through AMPEL should be included in the correct folder of the [ampel/contrib/groupname/](ampel/contrib/groupname/) as a python module inheriting from an appropriate abstract class. Examples of this process exists in this repository and the base definitions can be found in [Ampel-base](https://github.com/AmpelProject/Ampel-base). Use notebooks similar to those shown  [here](notebooks/) to develop and test these.
+
+> There are currently no sample units for the T1 and T3 stages. Contact the admininstrators for assistance in developing these.
+
+### Configuration files
+
+Each channel is defined in a configuration file similar to [this](ampel/contrib/groupname/channels.json). These describe which units each channel should make use of and the *run parameters* that should be provided to the unit when executed.
