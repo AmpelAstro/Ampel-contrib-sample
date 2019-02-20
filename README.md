@@ -12,7 +12,7 @@ We have included a series of notebooks that demonstrate how Ampel works at the d
 
 Use of this sample AMPEL setup requires the Ampel-base and Ampel-base-ZTF repositories to be installed, as well as a set of common python libraries such as fastavro.
 
-![TransientLife](figures/transientLife.pdf)
+![TransientLife](figures/ampellife.png)
 
 ## Use of this repository to create a full AMPEL channel
 
