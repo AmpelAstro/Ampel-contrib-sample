@@ -8,9 +8,9 @@ The basic concepts and several useful terms are described in the overview note i
 
 ## Getting used to AMPEL tiers and modules
 
-We have included a series of notebooks that demonstrate how Ampel works at the different internal tiers. At Tier 0 this includes a basic alert processor (broker). Each notebook includes basic examples of how a user specifies functionality through inheritance from base classes, and how these are applied to a data stream. 
+We have included a series of notebooks, in the `notebooks/` directory, that demonstrate how Ampel works at the different internal tiers. At Tier 0 this includes a basic alert processor (broker). Each notebook includes basic examples of how a user specifies functionality through inheritance from base classes, and how these are applied to a data stream. 
 
-Use of this sample AMPEL setup requires the Ampel-base and Ampel-base-ZTF repositories to be installed, as well as a set of common python libraries such as fastavro.
+Please read the corresponding [README file](notebooks/README.md) for more information on the requirements and steps necessary to run the notebooks locally.
 
 ## Use of this repository to create a full AMPEL channel
 
