@@ -1,7 +1,14 @@
 # Alert Management, Photometry and Evaluation of Lightcurves
 
 
-Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers where the first filters alerts, the second collects further data, the third computes derived properties and the fourth reacts to the assembled information. Users have great freedom in implementing algorithms into units that operate at these tiers, units which are subsequently implemented into the AMPEL systems for the analysis of either a live stream, archived data or simulations. Instructions for how to work with and implement AMPEL units can be found in the jupyter notebooks (and install instructions) in the [notebooks directory](notebooks/) of this repository. The rest of this files contain a general introduction to the AMPEL system.
+Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers: 
+
+- T0 filters alerts from a stream 
+- T1 looks for new data to add outside the stream 
+- T2 calculates/derives further properties based on the collected collected information
+- T3 triggers reactions
+
+Users are free to add their own operational *units*, implemented as python modules, to the live AMPEL system. These units are   at each of these layers. *Channels* request the use of units. This provides great power and freedom, but carries an initial cost in that units and channels have to be preconfigured. This repository contains a development version of AMPEL that allows channels and units to be developed and tested on static alert collections. Code developed for using these tools can then be migrated into a full AMPEL instance. Instructions for how to work with and implement AMPEL units can be found in the jupyter notebooks (and install instructions) in the [notebooks directory](notebooks/) of this repository. The rest of this README contain a general introduction to the AMPEL system.
 
 
 ## Introduction
