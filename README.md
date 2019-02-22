@@ -1,14 +1,14 @@
-# Alert Management, Photometry and Evaluation of Lightcurves
+# Alert Management, Photometry and Evaluation of Lightcurves (AMPEL)
 
 
 Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers: 
 
 - T0 filters alerts from a stream 
-- T1 looks for new data to add outside the stream 
-- T2 calculates/derives further properties based on the collected collected information
+- T1 looks for new transient data to add from outside the stream 
+- T2 calculates/derives further properties based on the collected information
 - T3 triggers reactions
 
-Users are free to add their own operational *units*, implemented as python modules, to the live AMPEL system. These units are   at each of these layers. *Channels* request the use of units. This provides great power and freedom, but carries an initial cost in that units and channels have to be preconfigured. This repository contains a development version of AMPEL that allows channels and units to be developed and tested on static alert collections. Code developed for using these tools can then be migrated into a full AMPEL instance. Instructions for how to work with and implement AMPEL units can be found in the jupyter notebooks (and install instructions) in the [notebooks directory](notebooks/) of this repository. The rest of this README contain a general introduction to the AMPEL system.
+Users are free to add their own operational *units*, implemented as python modules, to each tier of the live AMPEL system.  *Channels* request the use of units. This provides great power and freedom in that (almost) any combination of algorithm can be implemented used for a complete, repeatable analysis. However, it carries an initial cost in that units and channels have to be preconfigured. This repository contains a development version of AMPEL that allows channels and units to be developed and tested on static alert collections. Code developed using these tools can later be migrated into a full AMPEL instance. Instructions for how to install the development kit and how to design AMPEL units can be found in the [notebooks directory](notebooks/) of this repository. The rest of this README contains a general introduction to the AMPEL system.
 
 
 ## Introduction
