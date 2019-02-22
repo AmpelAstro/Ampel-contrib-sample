@@ -10,14 +10,16 @@ Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modu
 
 Users are free to add their own operational *units*, implemented as python modules, to each tier of the live AMPEL system.  *Channels* request the use of units. This provides great power and freedom in that (almost) any combination of algorithms can be implemented and used for complete, repeatable scientific studies. However, it carries an initial cost in that units and channels have to be preconfigured. This repository contains a development version of AMPEL that allows channels and units to be developed and tested on static alert collections. Modules developed using these tools can later be merged into a full AMPEL instance where they are applied either to live alert streams or archived data. Instructions for how to install the development kit and how to design AMPEL units can be found in the [notebooks directory](notebooks/) of this repository. The rest of this README contains a general introduction to the AMPEL system.
 
+The live AMPEL instance functions as a public broker for use with the ZTF alert stream. Contact the administrators for further information. 
 
-## Introduction
+
+## Motivation
 
 Both multi-messenger astronomy and new high-throughput wide-field surveys require the development of flexible tools for the selection and analysis of astrophysical transients. The Alert Management, Photometry and Evaluation of Lightcurves (AMPEL) system is a streaming data analysis framework. As such it functions to accept, process and react to streams of transient data. AMPEL contains a broker as the first of four pipeline levels, or 'tiers', where each can incoroporate user-contributed analysis units. These tools are embedded into a framework that encourages provenance and keeps track of the varying information states that a transient displays. The latter concept includes information gathered over time, but also tracks varying data access levels and e.g. improved calibration. AMPEL provides a tool that can assist in filtering transients in real time, running realistic alert reaction simulations, reprocessing of full datasets as well as the final scientific analysis of transient data.
 
- AMPEL differs from most other brokers in the focus on the full analysis chain of streamed data. As a consequence, there is no (curated) collection to be queried after alerts have been received. AMPEL users are rather pro-active in designing channels which are merged into the live instance and exposed to the full stream. This carries an initial cost in terms of channel creation based on archive data but provides full flexibility in analysis design, provenance and what reactions are possible.
+AMPEL differs from traditional brokers in the focus on the full analysis chain of streamed data. As a consequence, there is no (subselected) collection to be queried after alerts have been received. AMPEL users are pro-active in designing channels which are merged into the live instance and exposed to the full stream. This provides full flexibility in analysis design, provenance and what reactions are possible.
 
-The live AMPEL instance functions as a public broker for use with the public ZTF alert stream. Contact the administators to set up your channel based on this repository.
+
 
 
 ## AMPEL in a nutshell
