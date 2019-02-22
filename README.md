@@ -10,7 +10,7 @@ Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modu
 
 Users are free to add their own operational *units*, implemented as python modules, to each tier of the live AMPEL system.  *Channels* request the use of units. This provides great power and freedom in that (almost) any combination of algorithms can be implemented and used for complete, repeatable scientific studies. However, it carries an initial cost in that units and channels have to be preconfigured. This repository contains a development version of AMPEL that allows channels and units to be developed and tested on static alert collections. Modules developed using these tools can later be merged into a full AMPEL instance where they are applied either to live alert streams or archived data. Instructions for how to install the development kit and how to design AMPEL units can be found in the [notebooks directory](notebooks/) of this repository. The rest of this README contains a general introduction to the AMPEL system.
 
-The live AMPEL instance functions as a public broker for use with the ZTF alert stream. Contact the administrators for further information. 
+The live AMPEL instance functions as a public broker for use with the ZTF alert stream. High quality, potential extragalactic supernovae are submitted to the TNS in real-time.  
 
 
 ## Motivation
@@ -56,10 +56,10 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 
 *Life of a transient in AMPEL*. Sample behaviour at the four tiers of AMPEL as well as the database access are shown as columns, with the left side of the figure indicating when the four alerts belonging to the transient were received.
 1. T0: The first alert is rejected as being too faint, while the following passes the channel acceptance critiera. The third alert is rejected due to unexpected color. 
-2. T1: Photometric information is added outside of the filter at three ocations. Firstly, new observations of channel transients are added even if alerts in isolation would not be accepted. Seccondly, an observation from another facility is added. Thirdly,  updated calibration of a measurement cause this datapoint to be replaced.
-3. T2: Every time a new state is created a lightcurve fit is performed and the fit results stored as a Science Records.
-4. T3: A unit regularly tests whether the transient warrants a Slack posting (requesting potential further follow-up). The submit criteria are fulfilled the second time the unit is run. In both cases the evaluation is stored in the transient *Journal*, which is later used to prevent a transient to be posted multiple times. Once the transient has been not been updated for an extended time a T3 unit *purges* the transient to an external database that can be direclty queried by channel owners.
-5. Database: A transient entry is created in the DB as the first alert is accepted. After this, each new datapoint causes a new state to be created. T2 Science Records are each associated with one state. The T3 units return information that is stored in the Journal.
+2. T1: Photometric information is added outside of the filter at three occations. First a new observation of the transient was  added even if the alert in isolation would not be accepted. Subsequently, an observation from another facility is added. Finally, updated calibration of a measurement caused this datapoint to be replaced.
+3. T2: Every time a new state is created this triggers T2 calculations to be performed. In this case a lightcurve fit is performed. The outcome of every calcluation is stored as a Science Records linked to a state.
+4. T3: The requested T3 unit at scheduled times tests whether the transient warrants a Slack posting (for example suggesting further follow-up). The submit criteria are fulfilled the second time the unit is run. In both cases the evaluation is stored in the transient *Journal*. The Slack T3 checks the Journal to make sure a transient is not posted multiple times. Once the transient has been not been updated for an extended time a T3 unit *purges* the transient to an external database that can be directly queried by channel owners.
+5. Database: A transient entry is created in the DB as the first alert is accepted. After this, each new datapoint causes a new state to be created. T2 Science Records are each associated with one state. The T3 units return information that is stored in the Journal, which is directly connected to the transient.
 
 A technical outline of AMPEL can be found [here](figures/ZTF_Pipeline_overview_June_18.pdf).
 
@@ -75,7 +75,7 @@ Incorporating modules and channels into a live instance briefly consists of: i. 
 
 Units that are to be run through AMPEL should be included in the correct folder of the [ampel/contrib/groupname/](ampel/contrib/groupname/) as a python module inheriting from an appropriate abstract class. Examples of this process exists in this repository and the base definitions can be found in [Ampel-base](https://github.com/AmpelProject/Ampel-base). Use notebooks similar to those shown  [here](notebooks/) to develop and test these.
 
-> There are currently no sample units for the T1 and T3 stages. Contact the admininstrators for assistance in developing these.
+> Sample units and datasets for the T1 and T3 stages are currently in construction.
 
 ### Configuration files
 
@@ -91,4 +91,3 @@ An instance of AMPEL hosted at the DESY computer centre (Zeuthen) recieves and p
 
 One of the channels in this instance is being tuned to automatically submit high-quality extragalactic candidates with a high probability of being supernovae or AGNs to the TNS. The current selection focuses on transients brighter than 19.5 mag and with a contamination by stellar variability at <5%. Submission can be found at the TNS with the sender *AMPEL_ZTF_MSIP*. 
 
-## 
