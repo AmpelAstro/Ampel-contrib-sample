@@ -12,9 +12,6 @@ Users are free to add their own operational *units*, implemented as python modul
 
 The live AMPEL instance functions as a public broker for use with the ZTF alert stream. High quality, potential extragalactic supernovae are submitted to the TNS in real-time.  
 
-We have included a series of notebooks, in the `notebooks/` directory, that demonstrate how Ampel works at the different internal tiers. At Tier 0 this includes a basic alert processor (broker). Each notebook includes basic examples of how a user specifies functionality through inheritance from base classes, and how these are applied to a data stream. 
-
-Please read the corresponding [README file](notebooks/README.md) for more information on the requirements and steps necessary to run the notebooks locally.
 
 ## Motivation
 
