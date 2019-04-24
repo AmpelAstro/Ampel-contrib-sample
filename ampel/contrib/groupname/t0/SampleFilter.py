@@ -12,7 +12,12 @@ import logging
 from urllib.parse import urlparse
 from astropy.coordinates import SkyCoord
 from astropy.table import Table
-from catsHTM import cone_search
+import sys
+try:
+	from catsHTM import cone_search
+	doCat = True
+except ImportError:
+	doCat = False
 from ampel.base.abstract.AbsAlertFilter import AbsAlertFilter
 
 class SampleFilter(AbsAlertFilter):
@@ -72,8 +77,9 @@ class SampleFilter(AbsAlertFilter):
 		self.gaia_veto_gmag_max			= 18
 
 		# technical
-		self.catshtm_path 			= urlparse(base_config['catsHTM.default']).path
-		self.logger.info("using catsHTM files in %s"%self.catshtm_path)
+		if doCat:
+			self.catshtm_path 			= urlparse(base_config['catsHTM.default']).path
+			self.logger.info("using catsHTM files in %s"%self.catshtm_path)
 		self.keys_to_check = ( 'fwhm', 'magdiff', 'ra', 'dec' )
 
 
@@ -180,10 +186,13 @@ class SampleFilter(AbsAlertFilter):
 		
 		
 		# check with gaia
-		if self.is_star_in_gaia(latest):
-			self.logger.debug("rejected: within %.2f arcsec from a GAIA star (PM of PLX)" % 
-				(self.gaia_rs))
-			return None
+		if self.gaia_rs>0:
+			if not doCat:
+				sys.exit("Cannot match to Gaia without catsHTM!")	
+			if self.is_star_in_gaia(latest):
+				self.logger.debug("rejected: within %.2f arcsec from a GAIA star (PM of PLX)" % 
+					(self.gaia_rs))
+				return None
 		
 		# congratulation alert! you made it!
 		self.logger.debug("Alert %s accepted. Latest pp ID: %d"%(alert.tran_id, latest['candid']))
