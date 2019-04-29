@@ -51,7 +51,7 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 
 ## Life of a transient in AMPEL
 
-![TransientLife](figures/ampellife_6.pdf)
+![TransientLife](figures/ampellife.png)
 
 
 
