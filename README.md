@@ -51,15 +51,17 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 
 ## Life of a transient in AMPEL
 
-![TransientLife](figures/ampellife.png)
+![TransientLife](figures/ampellife_6.pdf)
 
 
-*Life of a transient in AMPEL*. Sample behaviour at the four tiers of AMPEL as well as the database access are shown as columns, with the left side of the figure indicating when the four alerts belonging to the transient were received.
-1. T0: The first alert is rejected as being too faint, while the following passes the channel acceptance critiera. The third alert is rejected due to unexpected color. 
-2. T1: Photometric information is added outside of the filter at three occations. First a new observation of the transient was  added even if the alert in isolation would not be accepted. Subsequently, an observation from another facility is added. Finally, updated calibration of a measurement caused this datapoint to be replaced.
-3. T2: Every time a new state is created this triggers T2 calculations to be performed. In this case a lightcurve fit is performed. The outcome of every calcluation is stored as a Science Records linked to a state.
-4. T3: The requested T3 unit at scheduled times tests whether the transient warrants a Slack posting (for example suggesting further follow-up). The submit criteria are fulfilled the second time the unit is run. In both cases the evaluation is stored in the transient *Journal*. The Slack T3 checks the Journal to make sure a transient is not posted multiple times. Once the transient has been not been updated for an extended time a T3 unit *purges* the transient to an external database that can be directly queried by channel owners.
-5. Database: A transient entry is created in the DB as the first alert is accepted. After this, each new datapoint causes a new state to be created. T2 Science Records are each associated with one state. The T3 units return information that is stored in the Journal, which is directly connected to the transient.
+
+*Life of a transient in AMPEL.* Sample behavior at the four tiers of \am as well as the database access are shown as columns, with the left side of the figure indicating when the four alerts belonging to the transient were received.
+1. T0: The first alert is rejected, while the following two pass the channel acceptance criteria. The final alert is, again, rejected as the transient is now too faint.
+2. T1: First, a measurement provided by a secondary facility is ingested. Second, new observations of channel transients are added even if alerts in isolation would not be accepted. Third, updated calibration of a measurement causes this datapoint to be replaced.
+3. T2: Every time a new state is created a lightcurve fit is performed and the fit results stored as a Science Records.
+4. T3: A unit regularly tests whether the transient warrants a Slack posting (requesting potential further follow-up). The submit criteria are fulfilled the second time the unit is run. In both cases the evaluation is stored in the transient \emph{Journal}, which is later used to prevent a transient to be posted multiple times. Once the transient has not been updated for an extended time a T3 unit \emph{purges} the transient to an external database that can be directly queried by channel owners.
+5. Database: A transient entry is created in the DB as the first alert is accepted. After this, each new datapoint causes a new state to be created. T2 Science Records are each associated with one state. The T3 units return information that is stored in the Journal.
+
 
 A technical outline of AMPEL can be found [here](figures/ZTF_Pipeline_overview_June_18.pdf).
 
@@ -89,5 +91,4 @@ An instance of AMPEL hosted at the DESY computer centre (Zeuthen) recieves and p
 
 ![AmpelLive](figures/ampel_intro.png)
 
-One of the channels in this instance is being tuned to automatically submit high-quality extragalactic candidates with a high probability of being supernovae or AGNs to the TNS. The current selection focuses on transients brighter than 19.5 mag and with a contamination by stellar variability at <5%. Submission can be found at the TNS with the sender *AMPEL_ZTF_MSIP*. 
-
+One of the channels in this instance is being tuned to automatically submit high-quality extragalactic candidates with a high probability of being supernovae or AGNs to the TNS. The current selection focuses on transients brighter than 19.5 mag and with a contamination by stellar variability at less than 5 percent. Two TNS senders are active: *ZTF_AMPEL_NEW* is designed to only post young candidates with a likely age less than 5 days, while *ZTF_AMPEL_COMPLETE* also posts transients with unconstrained explosion date, slow rise or irregular lightcurves. 
