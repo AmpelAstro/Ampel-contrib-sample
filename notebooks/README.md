@@ -1,12 +1,18 @@
 # Ampel-contrib-sample Notebooks
 
-These notebooks contain examples of how to get to know, implement and test units for the AMPEL tiers in a standalone way. Standalone means that the fairly complex background database and its task managers do not need to be installed and initiated. The AMPEL development packages are constructed such that units (python modules) that run with these will also function in the full, online AMPEL and system.
+These notebooks contain examples of how to get to know, implement and test units for the **AMPEL** tiers in a standalone way. Standalone means that the fairly complex background database and its task managers do not need to be installed and initiated. The AMPEL development packages are constructed such that units (python modules) that run with these will also function in the full, online AMPEL and system.
 
-The current notebooks describe the T0 and T2 stages. T3 units are harder to construct since they make use of further concepts such as TransientViews and the Journal, and iterate over chunks of all transients saved by the channel. We recommend channels to start by using the preconfigured units provided by the AMPEL development teams.
+The `t0_unit_example` jupyter notebook provides an first introduction both to the **AMPEL** development system as well as T0 filter units. The `t0_advanced_example` further explores the creation of filter units and `t2_unit_examples` introduces T2 classes.
+
+T3 units are harder to construct since they make use of further concepts such as TransientViews and the Journal, and iterate over chunks of all transients saved by the channel. We recommend channels to start by using the preconfigured units provided by the AMPEL development teams.
+
+For futher guidance on the implementation of **AMPEL** channels, contact ampel-info at desy.de.
 
 ## Installation with Pip
 
 ### Requirements
+
+AMPEL requires python 3.6+ and
 
 * [Git](https://git-scm.com/downloads)
 * [Python Pip](https://pip.pypa.io/en/stable/installing/)
