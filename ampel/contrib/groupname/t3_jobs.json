@@ -10,10 +10,12 @@
             "event": "SlackSummaryPublisher_Sample"
           }
         },
-        "channels": [
-          "FILTER_SAMPLE",
-          "FILTER_SAMPLE_LONGLIVED"
-        ],
+        "channels": {
+          "anyOf": [
+            "FILTER_SAMPLE",
+            "FILTER_SAMPLE_LONGLIVED"
+          ]
+        },
         "withFlags": "INST_ZTF",
         "withoutFlags": "HAS_ERROR"
       },
@@ -52,9 +54,6 @@
             "distpsnr1",
             "isdiffpos",
             "_id"
-          ],
-          "channels": [
-            "FILTER_SAMPLE"
           ],
           "excitement": {
             "Low": 5,
