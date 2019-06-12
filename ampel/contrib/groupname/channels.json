@@ -34,9 +34,7 @@
           },
           {
             "unitId": "T2ExamplePolyFit",
-            "runConfig": {
-              "degree": 3
-            }
+            "runConfig": "default"
           }
         ],
         "stream": "ZTFIPAC",
