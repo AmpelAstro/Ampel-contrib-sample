@@ -21,9 +21,9 @@
       "degree": 3
     }
   },
-  "CATALOGMATCH_sdssz": {
+  "CATALOGMATCH_example-general": {
     "t2Unit": "CATALOGMATCH",
-    "runConfig": "general",
+    "runConfig": "example-general",
     "author": "ampel-info@desy.de",
     "version": 1.0,
     "lastChange": "11.09.2018",
