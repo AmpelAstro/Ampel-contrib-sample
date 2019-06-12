@@ -31,10 +31,10 @@
         "t2Compute": [
           {
             "unitId": "CATALOGMATCH",
-            "runConfig": "general"
+            "runConfig": "example-general"
           },
           {
-            "unitId": "T2ExamplePolyFit",
+            "unitId": "POLYFIT",
             "runConfig": "default"
           }
         ],
@@ -93,7 +93,7 @@
           },
           {
             "unitId": "CATALOGMATCH",
-            "runConfig": "general"
+            "runConfig": "example-general"
           }
         ]
       }
