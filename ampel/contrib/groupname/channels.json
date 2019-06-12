@@ -1,6 +1,6 @@
 [
   {
-    "channel": "BrightNStableSample",
+    "channel": "EXAMPLE_BRIGHT_N_STABLE",
     "sources": [
       {
         "t0Filter": {
@@ -47,7 +47,7 @@
     ]
   },
   {
-    "channel": "HU_TNS_MSIP",
+    "channel": "EXAMPLE_TNS_MSIP",
     "sources": [
       {
         "stream": "ZTFIPAC",
@@ -98,7 +98,7 @@
     ]
   },
   {
-    "channel": "FILTER_ALERTPROP",
+    "channel": "EXAMPLE_ALERTPROP",
     "active": false,
     "sources": [
       {
@@ -158,7 +158,7 @@
     ]
   },
   {
-    "channel": "FILTER_RANDOM",
+    "channel": "EXAMPLE_RANDOM",
     "sources": [
       {
         "stream": "ZTFIPAC",
