@@ -9,81 +9,19 @@
 
 from ampel.base.abstract.AmpelABC import AmpelABC, abstractmethod
 from ampel.base.abstract.AbsT2Unit import AbsT2Unit
-#from ampel.core.flags.T2RunStates import T2RunStates
 import numpy
 
 class T2ExamplePolyFit(AbsT2Unit):
 	"""
-	Polynomial fitting
-	
+	Polynomial fitting	
 	Fits data using numpy 'polyfit'
 	"""
 	
-	"""
-	Example of what a simple T2 class should look like.
-
-	REQUIREMENTS:
-	-------------
-
-	A T2 class must (otherwise exception will be throwed):
-	* inherit the abstract parent class 'AbsT2Unit'
-	* implement the following two functions
-		-> init(self, logger, base_config=None) 
-		-> run(self, light_curve, run_config=None)
-
-
-	! TODO: UPDATE OUTDATED DOCSTRING !
-	***********************************
-	
-	ASSOCIATED AMPEL CONFIG EXAMPLE:
-	--------------------------------
-
-	The ampel config entries for this T2Unit could look like this:
-
-	Collection 't2_units':
-	{
-	    "_id" : "POLYFIT",
-	    "classFullPath" : "ampel.contrib.hu.examples.t2.T2ExamplePolyFit",
-	    "author" : "ztf-software@desy.de",
-	    "version" : 1.0,
-	    "baseConfig" : {
-	        "fitFunction" : "polyfit"
-	    }
-	}
-
-	Collection 't2_run_config':
-
-	{
-	    "_id" : "POLYFIT_default",
-		"author" : "ampel@physik.hu-berlin.de",
-		"version" : 1.0,
-		"lastChange" : "28.02.2018",
-		"runConfig" : {
-			"degree" : 3
-		}
-	},
-	{
-	    "_id" : "POLYFIT_advanced",
-		"author" : "ampel@physik.hu-berlin.de",
-		"version" : 1.0,
-		"lastChange" : "26.02.2018",
-		"runConfig" : {
-			"degree" : 5
-		}
-	}
-	"""
-
 	version = 1.0
 	author = "ztf-software@desy.de"
-	private = False
-	upperLimits = False
 
 	def __init__(self, logger, base_config):
 		"""
-		
-		! TODO: UPDATE OUTDATED DOCSTRING !
-		***********************************
-		
 		'logger': instance of logging.Logger (std python module 'logging')
 			-> example usage: logger.info("this is a log message")
 
@@ -104,10 +42,6 @@ class T2ExamplePolyFit(AbsT2Unit):
 
 	def run(self, light_curve, run_config):
 		""" 
-		
-		! TODO: UPDATE OUTDATED DOCSTRING !
-		***********************************
-		
 		'light_curve': instance of ampel.base.LightCurve. See LightCurve docstring for more info.
 
 		'run_config': dict instance containing run parameters defined in ampel config section:
@@ -130,10 +64,6 @@ class T2ExamplePolyFit(AbsT2Unit):
 				ERROR:		   Generic error
 				EXCEPTION:     An exception occured
 		"""
-
-		# if run_config is None or 'degree' not in run_config:
-		# 	self.logger.error("Run config parameter 'degree' is missing")
-		# 	return T2RunStates.BAD_CONFIG
 
 		x = light_curve.get_values("obs_date")
 		y = light_curve.get_values("mag")
