@@ -8,7 +8,7 @@
 # Last Modified By  : vb <vbrinnel@physik.hu-berlin.de>
 
 from ampel.base.abstract.AbsAlertFilter import AbsAlertFilter
-from ampel.pipeline.logging.LoggingUtils import LoggingUtils
+from ampel.pipeline.logging.AmpelLogger import AmpelLogger
 
 class ExampleFilter(AbsAlertFilter):
 	"""
@@ -34,7 +34,7 @@ class ExampleFilter(AbsAlertFilter):
 		"""
 
 		# Instance variable holding reference to provider logger 
-		self.logger = LoggingUtils.get_logger() if logger is None else logger
+		self.logger = AmpelLogger.get_logger() if logger is None else logger
 
 		# Logging example
 		self.logger.info("Please use this logger object for logging purposes")
