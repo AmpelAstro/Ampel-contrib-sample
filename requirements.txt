@@ -7,3 +7,4 @@ matplotlib==3.0.2
 astropy==3.1.1
 pymongo==3.7.2
 pydantic==0.30
+pre-commit>=1.18.3

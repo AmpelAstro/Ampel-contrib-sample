@@ -27,13 +27,13 @@ class ExampleFilter(AbsAlertFilter):
 		See the jupyter notebook "Understanding T0 Filters"
 
 		Parameters:
-		'on_match_t2_units': list of t2 unit ids (strings) 
+		'on_match_t2_units': list of t2 unit ids (strings)
 		'base_config': dict instance loaded from the ampel config
 		'run_config': dict instance loaded from the ampel config
 		'logger': logger instance (python module logging)
 		"""
 
-		# Instance variable holding reference to provider logger 
+		# Instance variable holding reference to provider logger
 		self.logger = AmpelLogger.get_logger() if logger is None else logger
 
 		# Logging example
@@ -55,23 +55,23 @@ class ExampleFilter(AbsAlertFilter):
 		"""
 		Mandatory implementation.
 		To exclude the alert, return *None*
-		To accept it, either 
+		To accept it, either
 			* return self.on_match_t2_units
-			* return a custom list of t2 unit ids (strings) 
-			 -> the custom list must be a subset of self.on_match_t2_units, 
+			* return a custom list of t2 unit ids (strings)
+			 -> the custom list must be a subset of self.on_match_t2_units,
 			    it cannot contain other/new t2 unit ids.
 
-		In this example filter, any measurement of a transient 
-		brighter than a fixed magnitude threshold will result 
+		In this example filter, any measurement of a transient
+		brighter than a fixed magnitude threshold will result
 		in this transient being inserted into ampel.
 		"""
 
 		# One way of filtering alerts based on fixed mag threshold
-		# (for other means of achiving the same results, please 
+		# (for other means of achiving the same results, please
 		# see the jupyter notebook "Understanding T0 Filters")
 		for pp in ampel_alert.get_photopoints():
 
-			# Example: 
+			# Example:
 			# self.filter_field: "magpsf"
 			# self.threshold: 18
 			if pp[self.filter_field] < self.threshold :

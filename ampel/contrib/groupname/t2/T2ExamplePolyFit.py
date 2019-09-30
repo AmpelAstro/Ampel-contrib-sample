@@ -13,10 +13,10 @@ import numpy
 
 class T2ExamplePolyFit(AbsT2Unit):
 	"""
-	Polynomial fitting	
+	Polynomial fitting
 	Fits data using numpy 'polyfit'
 	"""
-	
+
 	version = 1.0
 	author = "ztf-software@desy.de"
 
@@ -25,10 +25,10 @@ class T2ExamplePolyFit(AbsT2Unit):
 		'logger': instance of logging.Logger (std python module 'logging')
 			-> example usage: logger.info("this is a log message")
 
-		'base_config': optional dict loaded from ampel config section: 
+		'base_config': optional dict loaded from ampel config section:
 			t2_units->POLYFIT->baseConfig
 		"""
-	
+
 		# Save the logger as instance variable
 		self.logger = logger
 
@@ -41,14 +41,14 @@ class T2ExamplePolyFit(AbsT2Unit):
 
 
 	def run(self, light_curve, run_config):
-		""" 
+		"""
 		'light_curve': instance of ampel.base.LightCurve. See LightCurve docstring for more info.
 
 		'run_config': dict instance containing run parameters defined in ampel config section:
-			t2_run_config->POLYFIT_[run_config_id]->runConfig 
+			t2_run_config->POLYFIT_[run_config_id]->runConfig
 			whereby the run_config_id value is defined in the associated t2 document.
 			In the case of POLYFIT, run_config_id would be either 'default' or 'advanced'.
-			A given channel (say HU_SN_IA) could use the runConfig 'default' whereas 
+			A given channel (say HU_SN_IA) could use the runConfig 'default' whereas
 			another channel (say OKC_SNIIP) could use the runConfig 'advanced'
 
 		This method must return either:
@@ -58,7 +58,7 @@ class T2ExamplePolyFit(AbsT2Unit):
 					bson.BSON.encode(<dict instance to be returned>)
 				must not throw a InvalidDocument Exception
 			* One of these T2RunStates flag member:
-				MISSING_INFO:  reserved for a future ampel extension where 
+				MISSING_INFO:  reserved for a future ampel extension where
 							   T2s results could depend on each other
 				BAD_CONFIG:	   Typically when run_config is not set properly
 				ERROR:		   Generic error
