@@ -25,20 +25,11 @@ class T2ExamplePolyFit(AbsT2Unit):
 		'logger': instance of logging.Logger (std python module 'logging')
 			-> example usage: logger.info("this is a log message")
 
-		'base_config': optional dict loaded from ampel config section:
-			t2_units->POLYFIT->baseConfig
+		'base_config': optional dict with keys given by the `resources` property of the class
 		"""
 
 		# Save the logger as instance variable
 		self.logger = logger
-
-		# Check if base configuration was set properly
-		if base_config is None:
-			raise ValueError("baseConfig parameter 'fitFunction' is missing")
-
-		# Define the fit_function to be used later in method run(...)
-		self.fit_function = getattr(numpy, base_config['fitFunction'])
-
 
 	def run(self, light_curve, run_config):
 		"""
@@ -67,7 +58,7 @@ class T2ExamplePolyFit(AbsT2Unit):
 
 		x = light_curve.get_values("obs_date")
 		y = light_curve.get_values("mag")
-		p = self.fit_function(x, y, run_config['degree'])
+		p = numpy.polyfit(x, y, run_config['degree'])
 		chi_squared = numpy.sum((numpy.polyval(p, x) - y) ** 2)
 
 		self.logger.info("Please use 'self.logger' for logging")
