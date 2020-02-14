@@ -20,7 +20,7 @@ class T2ExamplePolyFit(AbsT2Unit):
 	version = 1.0
 	author = "ztf-software@desy.de"
 
-	def __init__(self, logger, base_config):
+	def __init__(self, logger, base_config=dict()):
 		"""
 		'logger': instance of logging.Logger (std python module 'logging')
 			-> example usage: logger.info("this is a log message")
