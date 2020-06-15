@@ -38,6 +38,61 @@
             "runConfig": "default"
           }
         ],
+        "t3Supervise": [
+          {
+            "task": "BrightNStableSummary",
+            "schedule": "every().day.at('15:00')",
+            "transients": {
+              "select": {
+                "created": {
+                  "after": {
+                    "use": "$timeDelta",
+                    "arguments": {
+                      "days": -40
+                    }
+                  }
+                },
+                "modified": {
+                  "after": {
+                    "use": "$timeLastRun",
+                    "event": "BrightNStableSummary"
+                  }
+                }
+              },
+              "state": "$latest",
+              "content": {
+                "docs": [
+                  "TRANSIENT",
+                  "COMPOUND",
+                  "T2RECORD",
+                  "PHOTOPOINT"
+                ],
+                "t2SubSelection": [
+                  "SNCOSMO",
+                  "CATALOGMATCH"
+                ]
+              }
+            },
+            "unitId": "SlackSummaryPublisher",
+            "runConfig": {
+              "quiet": true,
+              "slackToken": {
+                "salt": "H2tPPrHZVfQ=",
+                "iter": 10000,
+                "ks": 128,
+                "ct": "iANExC3XkS3wxydKLSviL31apHeSJcl78lUIN8lChPOjA7TP4QQCkeHu5QJxLHpx/okm7MvRj0HgQGPEwRnS",
+                "iv": "+CQ7/zRlmomurRWRdyiYYg==",
+                "cipher": "aes",
+                "mode": "ccm",
+                "adata": "",
+                "v": 1,
+                "ts": 64
+              },
+              "slackChannel": "#too-metachannel",
+              "fullPhotometry": true
+            }
+          }
+        ],
         "stream": "ZTFIPAC",
         "parameters": {
           "autoComplete": "live",
