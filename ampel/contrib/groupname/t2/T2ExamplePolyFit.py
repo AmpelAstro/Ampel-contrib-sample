@@ -9,9 +9,9 @@
 
 import numpy
 from typing import Union
-from ampel.view.LigthCurve import LigthCurve
+from ampel.view.LightCurve import LightCurve
 from ampel.t2.T2RunState import T2RunState
-from ampel.t2.T2UnitResult import T2UnitResult
+from ampel.type import T2UnitResult
 from ampel.abstract.AbsLightCurveT2Unit import AbsLightCurveT2Unit
 
 
@@ -27,7 +27,7 @@ class T2ExamplePolyFit(AbsLightCurveT2Unit):
 	# Polynom degree used for numpy.polyfit 
 	degree: int = 5
 
-	def run(self, lightcurve: LigthCurve) -> Union[T2UnitResult, T2RunState]:
+	def run(self, lightcurve: LightCurve) -> Union[T2UnitResult, T2RunState]:
 		"""
 		:param light_curve: see LightCurve docstring for more info.
 		:returns: a dict instance containing the values to be saved into the DB
