@@ -7,33 +7,29 @@
   "t0_filter": {
     "unit": "DecentFilterCopy",
     "config": {
-      "MIN_NDET": 2,
-      "MIN_TSPAN": 0,
-      "MAX_TSPAN": 5,
-      "MIN_RB": 0.3,
-      "MAX_FWHM": 5.5,
-      "MAX_ELONG": 1.4,
-      "MAX_MAGDIFF": 1.0,
-      "MAX_NBAD": 2,
-      "MIN_DIST_TO_SSO": 20,
-      "MIN_GAL_LAT": 14,
-      "GAIA_RS": 20,
-      "GAIA_PM_SIGNIF": 3,
-      "GAIA_PLX_SIGNIF": 3,
-      "GAIA_VETO_GMAG_MIN": 9,
-      "GAIA_VETO_GMAG_MAX": 20,
-      "GAIA_EXCESSNOISE_SIG_MAX": 999,
-      "PS1_SGVETO_RAD": 1,
-      "PS1_SGVETO_SGTH": 0.8,
-      "PS1_CONFUSION_RAD": 3,
-      "PS1_CONFUSION_SG_TOL": 0.1
+      "min_ndet": 2,
+      "min_tspan": 0,
+      "max_tspan": 5,
+      "min_rb": 0.3,
+      "max_fwhm": 5.5,
+      "max_elong": 1.4,
+      "max_magdiff": 1.0,
+      "max_nbad": 2,
+      "min_sso_dist": 20,
+      "min_gal_lat": 14,
+      "gaia_rs": 20,
+      "gaia_pm_signif": 3,
+      "gaia_plx_signif": 3,
+      "gaia_veto_gmag_min": 9,
+      "gaia_veto_gmag_max": 20,
+      "gaia_excessnoise_sig_max": 999,
+      "ps1_sgveto_rad": 1,
+      "ps1_sgveto_th": 0.8,
+      "ps1_confusion_rad": 3,
+      "ps1_confusion_sg_tol": 0.1
     }
   },
   "t2_compute": [
-    {
-      "unit": "T2CatalogMatch",
-      "config": "example-general"
-    },
     {
       "unit": "T2ExamplePolyFit"
     }
