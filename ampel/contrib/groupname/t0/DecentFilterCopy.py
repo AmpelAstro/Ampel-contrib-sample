@@ -317,4 +317,4 @@ class DecentFilterCopy(AbsAlertFilter[PhotoAlert]):
 		#for key in self.keys_to_check:
 		#	self.logger.debug("{}: {}".format(key, latest[key]))
 
-		return self.on_match_t2_units
+		return True
