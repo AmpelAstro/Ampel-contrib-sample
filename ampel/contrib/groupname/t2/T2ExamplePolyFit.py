@@ -39,8 +39,8 @@ class T2ExamplePolyFit(AbsLightCurveT2Unit):
 		BAD_CONFIG, ERROR, EXCEPTION
 		"""
 
-		x = lightcurve.get_values("obs_date")
-		y = lightcurve.get_values("mag")
+		x = lightcurve.get_values("jd")
+		y = lightcurve.get_values("magpsf")
 		p = numpy.polyfit(x, y, self.degree)
 		chi_squared = numpy.sum((numpy.polyval(p, x) - y) ** 2)
 
