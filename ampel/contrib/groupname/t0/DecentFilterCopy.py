@@ -12,7 +12,7 @@ from typing import Optional, Union
 from astropy.table import Table
 from astropy.coordinates import SkyCoord
 
-from ampel.contrib.hu import catshtm_server
+from ampel.contrib.groupname import catshtm_server
 from ampel.alert.PhotoAlert import PhotoAlert
 from ampel.abstract.AbsAlertFilter import AbsAlertFilter
 
