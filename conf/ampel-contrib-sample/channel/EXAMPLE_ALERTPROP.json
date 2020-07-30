@@ -1,0 +1,47 @@
+{
+  "channel": "EXAMPLE_ALERTPROP",
+  "contact": "ampel@desy.de",
+  "active": false,
+  "auto_complete": "live",
+  "template": "ztf_uw_public",
+  "t0_filter": {
+    "unit": "BasicMultiFilter",
+    "config": {
+      "filters": [
+        {
+          "criteria": [
+            {
+              "attribute": "rb",
+              "value": 0.8,
+              "operator": ">"
+            },
+            {
+              "attribute": "fid",
+              "value": 1,
+              "operator": "=="
+            },
+            {
+              "attribute": "mag",
+              "value": 18,
+              "operator": "<"
+            }
+          ],
+          "len": 3,
+          "operator": ">"
+        },
+        {
+          "logicalConnection": "OR",
+          "criteria": [
+            {
+              "attribute": "magdiff",
+              "value": 0.5,
+              "operator": ">"
+            }
+          ],
+          "len": 3,
+          "operator": ">"
+        }
+      ]
+    }
+  }
+}

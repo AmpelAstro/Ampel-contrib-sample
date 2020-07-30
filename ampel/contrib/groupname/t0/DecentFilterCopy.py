@@ -32,7 +32,7 @@ class DecentFilterCopy(AbsAlertFilter[PhotoAlert]):
 	on the provided PS1 star-galaxy classification.
 	"""
 
-	require = ('catsHTM.default', )
+	require = ('ampel-contrib-sample/catsHTM.default', )
 
 	# History
 	min_ndet: int # number of previous detections
@@ -73,7 +73,7 @@ class DecentFilterCopy(AbsAlertFilter[PhotoAlert]):
 			self.logger.info(f"Using {k}={getattr(self, k)}")
 
 		self.catshtm = catshtm_server.get_client(
-			self.resource['catsHTM.default']
+			*self.resource.values()
 		)
 
 		# To make this tenable we should create this list dynamically depending on what entries are required
