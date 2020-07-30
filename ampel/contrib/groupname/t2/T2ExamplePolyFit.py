@@ -9,6 +9,7 @@
 
 import numpy
 from typing import Union
+from pydantic import Field
 from ampel.view.LightCurve import LightCurve
 from ampel.t2.T2RunState import T2RunState
 from ampel.type import T2UnitResult
@@ -23,11 +24,12 @@ class T2ExamplePolyFit(AbsLightCurveT2Unit):
 
 	version: float = 1.1
 	author: str = "ztf-software@desy.de"
-		
-	# Polynom degree used for numpy.polyfit 
-	degree: int = 5
 
-	def run(self, lightcurve: LightCurve) -> Union[T2UnitResult, T2RunState]:
+	# Polynomial degree used for numpy.polyfit
+	degree: int = Field(5, ge=0)
+
+	def run(self, lightcurve: LightCurve) -> T2UnitResult:
+
 		"""
 		:param light_curve: see LightCurve docstring for more info.
 		:returns: a dict instance containing the values to be saved into the DB
@@ -48,9 +50,7 @@ class T2ExamplePolyFit(AbsLightCurveT2Unit):
 		self.logger.debug("By doing so, log entries will be automatically recorded into the database")
 
 		return {
-			"result": {
-				"polyfit": list(p),
-				"chi2": chi_squared
-			}
+			"polyfit": list(p),
+			"chi2": chi_squared
 		}
 	
