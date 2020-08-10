@@ -32,6 +32,44 @@
   "t2_compute": [
     {
       "unit": "T2ExamplePolyFit"
+    },
+    {
+      "unit": "T2SNCosmo",
+      "config": {
+        "model": "salt2",
+        "upper_limits": false
+      }
+    },
+    {
+      "unit": "T2CatalogMatch",
+      "config": "%T2CatalogMatch_general"
+    }
+  ],
+  "t3_supervise": [
+    {
+      "name": "minimal",
+      "template": "periodic_summary",
+      "schedule": "every().day.at('15:00')",
+      "run": {
+        "unit": "DemoT3Unit"
+      }
+    },
+    {
+      "name": "set_all_the_things",
+      "template": "periodic_summary",
+      "schedule": "every(4).hours",
+      "load": ["TRANSIENT", "T2RECORD"],
+      "filter": {
+        "t2": {
+          "unit": "T2SNCosmo",
+          "match": {
+            "fit_results.c": {"$gt": 1}
+          }
+        }
+      },
+      "run": {
+        "unit": "DemoT3Unit"
+      }
     }
   ]
 }
