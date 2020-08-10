@@ -1,0 +1,66 @@
+channel: EXAMPLE_BRIGHT_N_STABLE
+contact: ampel@desy.de
+active: true
+auto_complete: live
+# Channel template: basic settings for which alert stream to listen to, how to
+# build light curves from alert packets, etc.
+template: ztf_uw_public
+# T0: which photopoints should be accepted to build light curves for each
+#     transient?
+t0_filter:
+  unit: DecentFilterCopy
+  config:
+    min_ndet: 2
+    min_tspan: 0
+    max_tspan: 5
+    min_rb: 0.3
+    max_fwhm: 5.5
+    max_elong: 1.4
+    max_magdiff: 1
+    max_nbad: 2
+    min_sso_dist: 20
+    min_gal_lat: 14
+    gaia_rs: 20
+    gaia_pm_signif: 3
+    gaia_plx_signif: 3
+    gaia_veto_gmag_min: 9
+    gaia_veto_gmag_max: 20
+    gaia_excessnoise_sig_max: 999
+    ps1_sgveto_rad: 1
+    ps1_sgveto_th: 0.8
+    ps1_confusion_rad: 3
+    ps1_confusion_sg_tol: 0.1
+# T2: how should the collected photopoints and light curves be augmented?
+t2_compute:
+  - unit: T2ExamplePolyFit
+  - unit: T2SNCosmo
+    config:
+      model: salt2
+      upper_limits: false
+  - unit: T2CatalogMatch
+    config: '%T2CatalogMatch_general'
+# T3: what should I do with the collected data?
+t3_supervise:
+  # A minimal T3: select all data for transients modified since last run
+  # the optional parameters `name`, `load`, and `filter` are set to sensible
+  # defaults.
+  - template: periodic_summary
+    schedule: every().day.at('15:00')
+    run:
+      unit: DemoT3Unit
+  # More settings: load only transient and T2 records for transients modified
+  # since last run where `sncosmo` color parameter is > 1
+  - name: set_all_the_things
+    template: periodic_summary
+    schedule: every(4).hours
+    load:
+      - TRANSIENT
+      - T2RECORD
+    filter:
+      t2:
+        unit: T2SNCosmo
+        match:
+          fit_results.c:
+            $gt: 1
+    run:
+      unit: DemoT3Unit
