@@ -44,14 +44,14 @@ t3_supervise:
   # A minimal T3: select all data for transients modified since last run
   # the optional parameters `name`, `load`, and `filter` are set to sensible
   # defaults.
-  - template: periodic_summary
+  - template: ztf_periodic_summary
     schedule: every().day.at('15:00')
     run:
       unit: DemoT3Unit
   # More settings: load only transient and T2 records for transients modified
   # since last run where `sncosmo` color parameter is > 1
   - name: set_all_the_things
-    template: periodic_summary
+    template: ztf_periodic_summary
     schedule: every(4).hours
     load:
       - TRANSIENT
