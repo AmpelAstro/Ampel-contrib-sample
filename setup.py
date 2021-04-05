@@ -1,29 +1,53 @@
-from setuptools import setup
-setup(name='Ampel-contrib-sample',
-      version='0.5.0',
-      package_data = {'': ['*.json']},
-      packages=[
-          'ampel.contrib.groupname',
-          'ampel.contrib.groupname.t0',
-          'ampel.contrib.groupname.t2',
-      ],
-      entry_points = {
-          'ampel.channels' : [
-              'groupname = ampel.contrib.groupname.channels:load_channels',
-          ],
-          'ampel.pipeline.t0.units' : [
-              'DecentFilterCopy = ampel.contrib.groupname.t0.DecentFilterCopy:DecentFilterCopy',
-              'ExampleFilter = ampel.contrib.groupname.t0.ExampleFilter:ExampleFilter',
-              'SampleFilter = ampel.contrib.groupname.t0.SampleFilter:SampleFilter',
-          ],
-          'ampel.pipeline.t2.units' : [
-              'POLYFIT = ampel.contrib.groupname.t2.T2ExamplePolyFit:T2ExamplePolyFit'
-          ],
-          'ampel.pipeline.t2.configs' : [
-              'groupname = ampel.contrib.groupname.channels:load_t2_run_configs',
-          ],
-          'ampel.pipeline.t3.jobs' : [
-              'groupname = ampel.contrib.groupname.channels:load_t3_jobs',
-          ],
-      }
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# File              : setup.py
+# License           : BSD-3-Clause
+# Author            : jvs
+# Date              : Unspecified
+# Last Modified Date: 04.04.2021
+# Last Modified By  : jno 
+
+from setuptools import find_namespace_packages, setup
+
+setup(
+    name="ampel-contrib-sample",
+    version="0.7.1-alpha.0",
+    packages=find_namespace_packages(),
+    package_data={
+        "": ["*.json", "py.typed"],  # include any package containing *.json files
+        "conf": [
+            "*.json",
+            "**/*.json",
+            "**/**/*.json",
+            "*.yaml",
+            "**/*.yaml",
+            "**/**/*.yaml",
+            "*.yml",
+            "**/*.yml",
+            "**/**/*.yml",
+        ],
+    },
+    install_requires=[
+        'ampel-interface>=0.7.1-alpha.7,<0.7.2',
+        'ampel-core[plotting]>=0.7.1-alpha.3,<0.7.2',
+        'ampel-photometry>=0.7.1-alpha.0,<0.7.2',
+        'ampel-alerts>=0.7.1-alpha.0,<0.7.2',
+        'ampel-ztf>=0.7.1-alpha.8,<0.7.2',
+#        "catsHTM",
+        "extcats",
+        "zerorpc",
+        # see: https://github.com/sncosmo/sncosmo/issues/291
+        "sncosmo==2.2.0",
+        "iminuit==1.5.1",
+        "sfdmap",
+        "astropy",
+        "numpy",
+        "scipy",
+#        "beautifulsoup4",
+#       "backoff",
+#        "requests",
+#        "pymage @ https://github.com/MickaelRigault/pymage/archive/v1.0.tar.gz",
+        # pymage secretly depends on pandas
+#        "pandas",
+    ],
 )
