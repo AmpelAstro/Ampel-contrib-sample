@@ -36,9 +36,11 @@ setup(
 #        "catsHTM",
         "extcats",
         "zerorpc",
-        # see: https://github.com/sncosmo/sncosmo/issues/291
-        "sncosmo==2.2.0",
-        "iminuit==1.5.1",
+        # see: https://github.com/sncosmo/sncosmo/issues/291 - should be fixed now
+#        "sncosmo==2.2.0",
+#        "iminuit==1.5.1",
+        "sncosmo",
+        "iminuit",
         "sfdmap",
         "astropy",
         "numpy",
