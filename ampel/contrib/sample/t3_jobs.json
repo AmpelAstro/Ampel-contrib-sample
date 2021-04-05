@@ -1,0 +1,71 @@
+[
+  {
+    "job": "SlackSummaryPublisher_Sample",
+    "schedule": "every(60).minutes",
+    "transients": {
+      "select": {
+        "modified": {
+          "after": {
+            "use": "$timeLastRun",
+            "event": "SlackSummaryPublisher_Sample"
+          }
+        },
+        "channels": {
+          "anyOf": [
+            "FILTER_SAMPLE",
+            "FILTER_SAMPLE_LONGLIVED"
+          ]
+        },
+        "withFlags": "INST_ZTF",
+        "withoutFlags": "HAS_ERROR"
+      },
+      "state": "$latest",
+      "content": {
+        "docs": [
+          "TRANSIENT",
+          "COMPOUND",
+          "T2RECORD",
+          "PHOTOPOINT",
+          "UPPERLIMIT"
+        ],
+        "t2SubSelection": [
+          "SNCOSMO",
+          "CATALOGMATCH",
+          "T2ExamplePolyFit"
+        ]
+      }
+    },
+    "tasks": [
+      {
+        "task": "SampleToSlack",
+        "unitId": "SlackSummaryPublisher",
+        "runConfig": {
+          "cols": [
+            "ztf_name",
+            "ra",
+            "dec",
+            "magpsf",
+            "sgscore1",
+            "rb",
+            "most_recent_detection",
+            "first_detection",
+            "n_detections",
+            "distnr",
+            "distpsnr1",
+            "isdiffpos",
+            "_id"
+          ],
+          "excitement": {
+            "Low": 5,
+            "Mid": 30,
+            "High": 100
+          },
+          "slackToken": "xoxb-persistent-integration-token",
+          "slackChannel": "#channelname",
+          "fullPhotometry": true,
+          "quiet": true
+        }
+      }
+    ]
+  }
+]
