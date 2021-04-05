@@ -1,0 +1,46 @@
+channel: SAMPLE_CHANNEL
+contact: ampel@desy.de
+active: true
+auto_complete: live
+template: ztf_uw_public
+t0_filter:
+  unit: SimpleDecentFilterCopy
+  config:
+    min_rb: 0.3
+    min_ndet: 7
+    min_tspan: 10
+    max_tspan: 200
+    min_gal_lat: 15
+t2_compute:
+  - unit: T2SNcosmoComp
+    config: 
+      target_model_name: v19-2009ip-corr 
+      base_model_name: salt2 
+      chi2dof_cut: 2.
+  - unit: T2MultiMessMatch
+    config:
+      temporal_pull_scaling: 10
+      spatial_pull_scaling: 0.3
+      energy_pull_scaling: 1000
+      match_where: 'latest'
+t3_supervise:
+    template: ztf_periodic_summary
+    schedule: every(30).seconds
+    load:
+      - TRANSIENT
+      - COMPOUND
+      - DATAPOINT
+      - T2RECORD
+    filter: 
+      t2:
+        all_of: 
+        - unit: T2SNcosmoComp
+          match: 
+            target_match: true
+    run:
+      - unit: T3HelloWorld
+        config: 
+          t2info_from: 
+            - T2SNcosmoComp
+            - T2MultiMessMatch
+
