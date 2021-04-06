@@ -41,9 +41,15 @@ class T2SNcosmoComp(AbsLightCurveT2Unit):
     """
 
     # Parameters that can, and in some cases need to be configured by the user
+    # Name of model for the target search. If not available in the registery, SNcosmo will try to download
     target_model_name: str
+    # Name of base comparison model
     base_model_name: str
-    chi2dof_cut: float = 3
+    # Chi^2 / dof cut for acceptance as potential model
+    chi2dof_cut: float = 3.
+    # The target model chi^2/dof has to be better, after scaling with this factor  
+    chicomp_scaling: float = 1.
+    # Redshift bound for template fit
     zbound: Tuple[float, float] = (0,0.2)
 
 
@@ -51,8 +57,8 @@ class T2SNcosmoComp(AbsLightCurveT2Unit):
         """
         Retrieve models.
         """
-        self.target_model = sncosmo.Model(source=self.base_model_name)
-        self.base_model = sncosmo.Model(source=self.target_model_name)
+        self.target_model = sncosmo.Model(source=self.target_model_name)
+        self.base_model = sncosmo.Model(source=self.base_model_name)
     
         
     def run(self, light_curve: LightCurve) -> T2UnitResult:
@@ -81,14 +87,26 @@ class T2SNcosmoComp(AbsLightCurveT2Unit):
         phot_tab['zpsys'] = 'ab'
         
         # Fit base match
-        result, fitted_model = sncosmo.fit_lc(
-            phot_tab, self.base_model, self.base_model.param_names, bounds={'z':self.zbound})  
-        chidof_base = result.chisq / result.ndof
+        try:
+            result, fitted_model = sncosmo.fit_lc(
+                phot_tab, self.base_model, self.base_model.param_names, bounds={'z':self.zbound})  
+            chidof_base = result.chisq / result.ndof
+        except RuntimeError:
+            # We interpret a poor fit a a weird lightcurve, and exit
+            self.logger.info("Base fit fails",extra={"stock_id":light_curve.stock_id})
+            return {'chidof_base':-1,'chidof_target':0, 'model_match': False, 'info': 'basefit fails'}
+
         
         # Fit target source
-        result, fitted_model = sncosmo.fit_lc(
-            phot_tab, self.target_model, self.target_model.param_names, bounds={'z':self.zbound}  )  
-        chidof_target = result.chisq / result.ndof
+        try:
+            result, fitted_model = sncosmo.fit_lc(
+                phot_tab, self.target_model, self.target_model.param_names, bounds={'z':self.zbound}  )  
+            chidof_target = result.chisq / result.ndof
+        except RuntimeError:
+            # We interpret a poor fit a a weird lightcurve, and exit
+            self.logger.info("Target fit fails",extra={"stock_id":light_curve.stock_id})
+            return {'chidof_base':chidof_base,'chidof_target':-1, 'model_match': False, 'info': 'targetfit fails'}
+        
         
         # Gather information to propagate / log
         fit_info = {'chidof_base':chidof_base,'chidof_target':chidof_target,
@@ -98,7 +116,7 @@ class T2SNcosmoComp(AbsLightCurveT2Unit):
         if chidof_target>self.chi2dof_cut:
             fit_info['target_match'] = False
             fit_info['info'] = 'Poor lc fit'
-        elif chidof_base<chidof_target:
+        elif chidof_base < ( chidof_target * self.chicomp_scaling ):
             fit_info['target_match'] = False
             fit_info['info'] = 'Better base fit'
         else:

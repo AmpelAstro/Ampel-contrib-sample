@@ -19,9 +19,9 @@ t2_compute:
       chi2dof_cut: 2.
   - unit: T2MultiMessMatch
     config:
-      temporal_pull_scaling: 10
-      spatial_pull_scaling: 0.3
-      energy_pull_scaling: 1000
+      temporal_pull_scaling: 1
+      spatial_pull_scaling: 3.
+      energy_pull_scaling: 0.001
       match_where: 'latest'
 t3_supervise:
     template: ztf_periodic_summary
@@ -37,6 +37,10 @@ t3_supervise:
         - unit: T2SNcosmoComp
           match: 
             target_match: true
+        - unit: T2MultiMessMatch
+          match: 
+            best_match:
+              $lt: 1
     run:
       - unit: T3HelloWorld
         config: 

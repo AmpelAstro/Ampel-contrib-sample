@@ -43,10 +43,9 @@ class T2MultiMessMatch(AbsLightCurveT2Unit):
         """
         Retrieve a list of potential MM counterparts.
         """
-        mm_sample = {'ra': 20*u.deg, 'dec': 10*u.deg, 'pos_error': 1*u.deg,
-                     'time': Time(2459224.5, format='jd'), 'time_error': 0.1*u.d, 
+        mm_sample = {'ra': 15.9*u.deg, 'dec': 45*u.deg, 'pos_error': 1*u.deg,
+                     'time': Time(2459100, format='jd'), 'time_error': 0.1*u.d, 
                      'ab_mag': 17, 'ab_mag_errr': 0.5, 'mm_ID':'sample_mm_alert'}
-#        mm_sample = {}
 
         return [mm_sample]
 
