@@ -1,0 +1,28 @@
+name: sample_t3_process
+tier: 3
+active: true
+template: ztf_periodic_summary
+schedule: every(1).minutes
+channel:
+  any_of:
+    - SAMPLE_CHANNEL
+load:
+  - TRANSIENT
+  - DATAPOINT
+  - T2RECORD
+filter:
+  t2:
+    all_of:
+    - unit: T2SNcosmoComp
+      match:
+        target_match: true
+    - unit: T2MultiMessMatch
+      match:
+        best_match:
+          $lt: 1
+run:
+  - unit: T3HelloWorld
+    config:
+      t2info_from: 
+      - T2SNcosmoComp
+      - T2MultiMessMatch
