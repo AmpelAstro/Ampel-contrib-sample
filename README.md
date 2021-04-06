@@ -12,6 +12,39 @@ Users are free to add their own operational *units*, implemented as python modul
 
 The live AMPEL instance functions as a public broker for use with the ZTF alert stream. High quality, potential extragalactic supernovae are submitted to the TNS in real-time. For further questions regarding how to set up an **AMPEL** channel, contact ampel-info at desy.de.
 
+## How to use this repository
+
+This repository cantains a set of tutorial notebooks, together with some sample units. These introduce both the process for constructing AMPEL units and channels, as well as for hosting a full local AMPEL instance. 
+
+These install instructions assume a python 3.8 environment. A convenient way to achieve this is through conda: `conda create -n ampelTutorial python=3.8` && `conda activate ampelTutorial`. 
+
+The following steps will install the core AMPEL modules, as well as creating a starting AMPEL configuration file. This will be used to form a `context` in the notebooks.
+1. `pip install ampel-ztf` 
+2. `conda install -c conda-forge sncosmo`
+3. `conda install -c conda-forge iminuit` 
+4. `conda install -c conda-forge jupyter` 
+5. `pip install git+https://github.com/AmpelProject/Ampel-ipython.git`
+6. `git clone https://github.com/AmpelProject/Ampel-contrib-sample.git`
+7. `pip install --no-deps -e Ampel-contrib-sample`
+8. `ampel-config build > ampel_config.yml` 
+
+These steps will clone the `Ampel-contrib-sample` repository, and create a `ampel_config.yml` context file. If the last step produces errors it means some setp of the analysis did not complete. Next, head to the `notebooks` subdirectory of `Ampel-contrib-sample` and look at the notebooks through executing `jupyter notebook`. 
+
+Tutorials 2-4 use a `mongoDB` to store intermediate results (as in a full install), which needs to be separately installed and started. Edit the `ampel_config.yml` file in case it should connect through a non-standard port.
+
+### Creating your AMPEL repository
+
+The first step for developing an AMPEL science program is to make a repository, using this as a template. Replace `sample` with a suitable group identifier. 
+
+### AMPEL unit files
+
+Units that are to be run through AMPEL are included in the correct folder of the [ampel/contrib/sample/](ampel/contrib/sample/) as python modules inheriting from an appropriate abstract class. This ensures that they can be incorporated into a live AMPEL instance processing real-time or archive data. 
+
+### Configuration files
+
+The `conf` directory contains a set of different configuration files: `units.yaml` lists new units added in this repository, the `channel` subdirectory contains configuration for specific channels and the `process` subdirectory lists distinct processes together with their scheduling criteria. A channel configuration can list processes, while operations that join transients from multiple channels have to list these as a separate process.
+
+
 
 ## Motivation
 
@@ -66,40 +99,6 @@ The final AMPEL level, Tier 3 (T3), consists of *schedulable* actions. While T2s
 A technical outline of AMPEL can be found [here](figures/ZTF_Pipeline_overview_June_18.pdf).
 
 
-
-
-
-## How to use this repository
-
-This repository cantains a set of tutorial notebooks, together with some sample units. These introduce both the process for constructing AMPEL units and channels, as well as for hosting a full local AMPEL instance. 
-
-These install instructions assume a python 3.8 environment. A convenient way to achieve this is through conda: `conda create -n ampelTutorial python=3.8` && `conda activate ampelTutorial`. 
-
-The following steps will install the core AMPEL modules, as well as creating a starting AMPEL configuration file. This will be used to form a `context` in the notebooks.
-1. `pip install ampel-ztf` 
-2. `conda install -c conda-forge sncosmo`
-3. `pip install iminuit` 
-4. `pip install jupyter` 
-5. `pip install git+https://github.com/AmpelProject/Ampel-ipython.git`
-6. `git clone https://github.com/AmpelProject/Ampel-contrib-sample.git`
-7. `pip install --no-deps -e Ampel-contrib-sample`
-8. `ampel-config build > ampel_config.yml` 
-
-These steps will clone the `Ampel-contrib-sample` repository, and create a `ampel_config.yml` context file. If the last step produces errors it means some setp of the analysis did not complete. Next, head to the `notebooks` subdirectory of `Ampel-contrib-sample` and look at the notebooks through executing `jupyter notebook`. 
-
-Tutorials 2-4 use a `mongoDB` to store intermediate results (as in a full install), which needs to be separately installed and started. Edit the `ampel_config.yml` file in case it should connect through a non-standard port.
-
-### Creating your AMPEL repository
-
-The first step for developing an AMPEL science program is to make a repository, using this as a template. Replace `sample` with a suitable group identifier. 
-
-### AMPEL unit files
-
-Units that are to be run through AMPEL are included in the correct folder of the [ampel/contrib/sample/](ampel/contrib/sample/) as python modules inheriting from an appropriate abstract class. This ensures that they can be incorporated into a live AMPEL instance processing real-time or archive data. 
-
-### Configuration files
-
-The `conf` directory contains a set of different configuration files: `units.yaml` lists new units added in this repository, the `channel` subdirectory contains configuration for specific channels and the `process` subdirectory lists distinct processes together with their scheduling criteria. A channel configuration can list processes, while operations that join transients from multiple channels have to list these as a separate process.
 
 
 
