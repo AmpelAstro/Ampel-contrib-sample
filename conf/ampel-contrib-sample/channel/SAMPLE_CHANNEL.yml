@@ -1,6 +1,6 @@
 channel: SAMPLE_CHANNEL
-contact: ampel@desy.de
-active: true
+contact: maintainer_contact@doe.com
+active: false
 auto_complete: live
 template: ztf_uw_public
 t0_filter:
