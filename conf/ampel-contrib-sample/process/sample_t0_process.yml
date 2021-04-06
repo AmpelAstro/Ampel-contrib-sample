@@ -1,0 +1,51 @@
+name: sample_t0_process
+tier: 0
+active: true
+schedule: super
+channel: SAMPLE_CHANNEL
+controller:
+  unit: ZTFAlertStreamController
+processor:
+  unit: AlertProcessor
+  config:
+    directives:
+    - channel: SAMPLE_CHANNEL
+       stock_match:
+        filter: bypass
+        update_rej: true
+        retro_complete: true
+      filter:
+        unit: SimpleDecentFilterCopy
+        config:
+          min_rb: 0.3
+          min_ndet: 7
+          min_tspan: 10
+          max_tspan: 200
+          min_gal_lat: 15
+      t0_add:
+        unit: ZiAlertContentIngester
+        t1_combine:
+        - unit: PhotoCompoundIngester
+          config:
+            combiner:
+              unit: ZiT1Combiner
+          t2_compute:
+            unit: PhotoT2Ingester
+            config:
+              tags:
+              - ZTF
+            units:
+            - unit: T2SNcosmoComp
+              config: 55367495000452165
+            - unit: T2MultiMessMatch
+              config: 37362927814107367
+             - unit: T2LightCurveSummary
+       stock_update:
+         unit: ZiStockIngester
+     supplier:
+       unit: ZiAlertSupplier
+     loader:
+       unit: TarAlertLoader
+      config:
+        file_path: '../sample_data/ztfpub_200917_pruned.tar.gz'
+        
