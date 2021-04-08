@@ -29,4 +29,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/ampel-notebook:${{ env.CI_ACTION_REF_NAME }}
+            ghcr.io/${{ env.CI_REPOSITORY_OWNER_SLUG }}/${{ env.CI_REPOSITORY_NAME_SLUG }}:${{ env.CI_ACTION_REF_NAME_SLUG }}
