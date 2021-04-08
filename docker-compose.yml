@@ -7,10 +7,10 @@ services:
       - "27017"
   notebook:
     command: jupyter notebook
-    image: ampel-demo
+    image: ghcr.io/ampelproject/ampel-contrib-sample:lsstc-broker-workshop
     volumes:
       - ./notebooks:/notebooks
-      - ./sample_data:/data
+      - ./sample_data:/sample_data
     working_dir: /notebooks
     ports:
       - "8891:8888"
