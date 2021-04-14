@@ -112,10 +112,11 @@ class SimpleDecentFilterCopy(AbsAlertFilter[PhotoAlert]):
 	def apply(self, alert: PhotoAlert):
 		"""
 		Mandatory implementation.
-		To exclude the alert, return *None*
-		To accept it, either return
-		* self.on_match_t2_units
-		* or a custom combination of T2 unit names
+		Return values:
+		- None or False: reject the alert
+		- True: accept the alert and create all defined t2 documents
+		- positive integer: accept the alert and create t2 documents associated with provided group id
+		- negative integer: filter (own) rejection code (must not exceed 255)
 		"""
 
 		# CUT ON THE HISTORY OF THE ALERT
