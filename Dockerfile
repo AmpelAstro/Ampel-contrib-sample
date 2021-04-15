@@ -32,6 +32,8 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
     sed -i -e "/allow_root/ a c.NotebookApp.allow_root = True" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py && \
     sed -i -e "/custom_display_url/ a c.NotebookApp.custom_display_url = \'http://localhost:8891\'" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py && \
     sed -i -e "/c.NotebookApp.ip/ a c.NotebookApp.ip = '0.0.0.0'" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py && \
+    sed -i -e "/c.NotebookApp.token/ a c.NotebookApp.token = ''" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py && \
+    sed -i -e "/c.NotebookApp.password/ a c.NotebookApp.password = ''" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py && \
     sed -i -e "/open_browser/ a c.NotebookApp.open_browser = False" ${JUPYTER_CONFIG_DIR}/jupyter_notebook_config.py
 
 # Make cache dirs

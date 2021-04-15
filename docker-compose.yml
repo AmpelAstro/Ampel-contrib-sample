@@ -13,6 +13,6 @@ services:
       - ./sample_data:/sample_data
     working_dir: /notebooks
     ports:
-      - "8891:8888"
+      - "1270.0.01:8891:8888"
     depends_on:
       - mongo
