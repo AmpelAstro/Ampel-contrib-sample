@@ -1,7 +1,6 @@
-# Alert Management, Photometry and Evaluation of Lightcurves (AMPEL)
+# AMPEL
 
-
-Alert Management, Photometry and Evaluation of Lightcurves (**AMPEL**) is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers:
+Ampel is a modular software framework designed for the analysis of streamed data. AMPEL operates in four different tiers:
 
 - T0 filters alerts from a stream
 - T1 looks for new transient data to add from outside the stream
