@@ -2,7 +2,7 @@ git+https://github.com/AmpelProject/Ampel-base.git
 git+https://github.com/AmpelProject/Ampel-base-ZTF.git
 jupyter==1.0.0
 fastavro==0.21.18
-numpy==1.16.1
+numpy==1.22.0
 matplotlib==3.0.2
 astropy==3.1.1
 pymongo==3.7.2
